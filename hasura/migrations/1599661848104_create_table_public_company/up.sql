@@ -1,0 +1,1 @@
+CREATE TABLE "public"."company"("id" serial NOT NULL, "name" text NOT NULL, "contact" text NOT NULL, "address" text NOT NULL, "description" text, "category_id" integer NOT NULL, PRIMARY KEY ("id") , FOREIGN KEY ("category_id") REFERENCES "public"."category"("id") ON UPDATE restrict ON DELETE restrict);
