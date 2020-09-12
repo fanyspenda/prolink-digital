@@ -14,7 +14,7 @@ const graphqlClient = new ApolloClient({
 function MyApp({ Component, pageProps }) {
 	return (
 		<ApolloProvider client={graphqlClient}>
-			<Component {...pageProps} />;
+			<Component {...pageProps} />
 		</ApolloProvider>
 	);
 }

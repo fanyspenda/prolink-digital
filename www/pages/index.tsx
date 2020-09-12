@@ -11,6 +11,7 @@ import {
 import { gql, useQuery } from "@apollo/client";
 import { categoriesType } from "types/category";
 import styles from "styles/Home.module.css";
+import FormRenderer from "components/form";
 
 const Q_GET_CATEGORIES = gql`
 	query {
@@ -94,29 +95,6 @@ export default function Home() {
 				kumpulan para penggiat industri IT Bayuangga
 			</p>
 		</div>
-	);
-
-	const FormRenderer = () => (
-		<Form style={{ marginTop: "80px" }}>
-			<Row>
-				<Col span={16}>
-					<Form.Item
-						name="searchContext"
-						style={{ marginRight: "10px" }}
-					>
-						<Input
-							size="large"
-							placeholder="para tretan, monggo cari para penggiat teknologi di sini.."
-						/>
-					</Form.Item>
-				</Col>
-				<Col span={8}>
-					<Button block type="primary" size="large">
-						Cari
-					</Button>
-				</Col>
-			</Row>
-		</Form>
 	);
 
 	return (

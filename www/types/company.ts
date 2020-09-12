@@ -6,5 +6,5 @@ export type companyType = {
 	description: string;
 	address: string;
 	contact: string;
-	category: categoryType[];
+	category: categoryType;
 };
