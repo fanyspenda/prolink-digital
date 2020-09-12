@@ -3,7 +3,8 @@ import { useQuery, gql } from "@apollo/client";
 import { categoryType } from "types/category";
 import FormRenderer from "components/form";
 import { ListRenderer } from "components/customList";
-import "styles/Search.module.css";
+import styles from "styles/Search.module.css";
+import { Layout } from "antd";
 
 type categoryByPKType = {
 	category_by_pk: categoryType;
@@ -47,17 +48,21 @@ const Result = ({ result }) => {
 
 	return (
 		!loading && (
-			<div>
-				{FormRenderer()}
-				<div className="headerPage">
-					<h1>Anda Mencari Kategori "{data.category_by_pk.name}"</h1>
-				</div>
-
-				{ListRenderer(
-					data.category_by_pk.companies,
-					data.category_by_pk.companies.length
-				)}
-			</div>
+			<>
+				<Layout
+					className={styles.container}
+					style={{ marginBottom: "10px" }}
+				>
+					{FormRenderer()}
+				</Layout>
+				<Layout className={styles.container}>
+					{ListRenderer(
+						data.category_by_pk.companies,
+						data.category_by_pk.companies.length,
+						data.category_by_pk.name
+					)}
+				</Layout>
+			</>
 		)
 	);
 };

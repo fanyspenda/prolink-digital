@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
-import { Card, Space, Input, Button, Form, Row, Col } from "antd";
+import { Card, Space, Input, Button, Form, Row, Col, Layout } from "antd";
 import {
 	RiPencilRuler2Fill,
 	RiMovie2Fill,
@@ -38,24 +38,36 @@ export default function Home() {
 	};
 
 	const CardManager = (categories: categoriesType, colors: string[]) => {
-		const cards = categories.category.map((value, index) => (
-			<Link href="/category/[result]" as={`/category/${value.id}`}>
-				<Card
-					cover={IconManager(value.name)}
-					bordered
-					hoverable
-					style={{
-						width: 300,
-						padding: "10px",
-						border: `3px solid ${colors[index]}`,
-						borderRadius: "15px",
-					}}
-				>
-					<Meta title={<b>{value.name}</b>} />
-				</Card>
-			</Link>
-		));
-		return cards;
+		return (
+			<Layout
+				style={{
+					background: "none",
+					display: "flex",
+					flexFlow: "row wrap",
+					alignItems: "center",
+					justifyContent: "center",
+				}}
+			>
+				{categories.category.map((value, index) => (
+					<Link
+						href="/category/[result]"
+						as={`/category/${value.id}`}
+					>
+						<Card
+							cover={IconManager(value.name)}
+							hoverable
+							style={{
+								width: "300px",
+								margin: "10px",
+								border: `3px solid ${colors[index]}`,
+							}}
+						>
+							<Meta title={<b>{value.name}</b>} />
+						</Card>
+					</Link>
+				))}
+			</Layout>
+		);
 	};
 
 	const CardRenderer = () => (
@@ -67,27 +79,20 @@ export default function Home() {
 			<p
 				style={{
 					fontSize: "15px",
-					marginBottom: "0px",
 					fontWeight: "lighter",
 				}}
 			>
 				atau klik kategori di bawah
 			</p>
-			<RiArrowDownSFill
-				color="blue"
-				size="20px"
-				style={{ marginBottom: "10px" }}
-			/>
+			<RiArrowDownSFill color="blue" size="20px" />
 			<br />
-			<Space size="large">
-				{!loading &&
-					CardManager(data, ["blue", "orange", "purple", "red"])}
-			</Space>
+
+			{!loading && CardManager(data, ["blue", "orange", "purple", "red"])}
 		</div>
 	);
 
 	const HeaderRenderer = () => (
-		<div className={styles.pageHeader} style={{ background: "white" }}>
+		<div className={styles.pageHeader}>
 			<h1>
 				<b>Probolinggo Digital</b>
 			</h1>
@@ -98,7 +103,7 @@ export default function Home() {
 	);
 
 	return (
-		<div className={styles.container}>
+		<Layout className={styles.container}>
 			<Head>
 				<title>Prolink Digital</title>
 				<link rel="icon" href="/favicon.ico" />
@@ -109,6 +114,6 @@ export default function Home() {
 				{FormRenderer()}
 				{CardRenderer()}
 			</Space>
-		</div>
+		</Layout>
 	);
 }

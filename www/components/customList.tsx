@@ -20,9 +20,16 @@ const ContactRenderer = (text: string) => {
 	);
 };
 
-export const ListRenderer = (companies: companyType[], totalData: number) => {
+export const ListRenderer = (
+	companies: companyType[],
+	totalData: number,
+	searchKey: string
+) => {
 	return (
 		<div>
+			<div>
+				<h1>Anda Mencari Kategori "{searchKey}"</h1>
+			</div>
 			<p>
 				menampilkan <b style={{ fontWeight: "bold" }}>{totalData}</b>{" "}
 				hasil :

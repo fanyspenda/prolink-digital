@@ -7,7 +7,14 @@ const FormRenderer = () => {
 	};
 
 	return (
-		<Form style={{ marginTop: "40px" }} onFinish={handleSubmit}>
+		<Form
+			style={{
+				marginTop: "40px",
+				marginLeft: "10px",
+				marginRight: "10px",
+			}}
+			onFinish={handleSubmit}
+		>
 			<Row>
 				<Col span={20}>
 					<Form.Item
