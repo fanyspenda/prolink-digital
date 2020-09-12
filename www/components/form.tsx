@@ -1,9 +1,11 @@
 import { Form, Row, Col, Input, Button } from "antd";
-import Link from "next/link";
+import { useRouter } from "next/router";
 
 const FormRenderer = () => {
+	const router = useRouter();
+
 	const handleSubmit = (values: { searchContext: string }) => {
-		console.log(values.searchContext);
+		router.push("/search/[search]", `/search/${values.searchContext}`);
 	};
 
 	return (

@@ -1,5 +1,5 @@
 import { companyType } from "types/company";
-import { List, Space } from "antd";
+import { List, Space, Layout } from "antd";
 import { RiPhoneFill, RiBuilding2Fill } from "react-icons/ri";
 
 const AddressRenderer = (text: string) => {
@@ -26,9 +26,13 @@ export const ListRenderer = (
 	searchKey: string
 ) => {
 	return (
-		<div>
+		<Layout
+			style={{
+				background: "white",
+			}}
+		>
 			<div>
-				<h1>Anda Mencari Kategori "{searchKey}"</h1>
+				<h1>Anda Mencari "{searchKey}"</h1>
 			</div>
 			<p>
 				menampilkan <b style={{ fontWeight: "bold" }}>{totalData}</b>{" "}
@@ -41,7 +45,13 @@ export const ListRenderer = (
 				dataSource={companies}
 				renderItem={(company) => (
 					<List.Item
-						style={{ background: "white" }}
+						style={{
+							background: "white",
+							border: "2px solid royalblue",
+							borderRight: "none",
+							borderLeft: "none",
+							borderBottom: "none",
+						}}
 						actions={[
 							AddressRenderer(company.address),
 							ContactRenderer(company.contact),
@@ -59,6 +69,6 @@ export const ListRenderer = (
 					</List.Item>
 				)}
 			/>
-		</div>
+		</Layout>
 	);
 };
