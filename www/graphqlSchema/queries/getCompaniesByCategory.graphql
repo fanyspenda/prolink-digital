@@ -1,0 +1,15 @@
+query getCompaniesByCategory($id: Int!) {
+	category_by_pk(id: $id) {
+		name
+		companies {
+			id
+			name
+			description
+			address
+			contact
+			category {
+				name
+			}
+		}
+	}
+}

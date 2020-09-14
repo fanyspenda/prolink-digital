@@ -9,21 +9,12 @@ import {
 	RiArrowDownSFill,
 } from "react-icons/ri";
 import { gql, useQuery } from "@apollo/client";
-import { categoriesType } from "types/category";
 import styles from "styles/Home.module.css";
 import FormRenderer from "components/form";
-
-const Q_GET_CATEGORIES = gql`
-	query {
-		category {
-			id
-			name
-		}
-	}
-`;
+import { CategoriesDocument, CategoriesQuery } from "graphqlSchema/types";
 
 export default function Home() {
-	const { data, loading } = useQuery<categoriesType>(Q_GET_CATEGORIES);
+	const { data, loading } = useQuery<CategoriesQuery>(CategoriesDocument);
 	const { Meta } = Card;
 
 	const IconManager = (categoryName: string) => {
@@ -37,7 +28,7 @@ export default function Home() {
 			return <RiGamepadFill color="red" size="100px" />;
 	};
 
-	const CardManager = (categories: categoriesType, colors: string[]) => {
+	const CardManager = (categories: CategoriesQuery, colors: string[]) => {
 		return (
 			<Layout
 				style={{

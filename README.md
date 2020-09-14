@@ -19,7 +19,6 @@ Situs web dimana kita bisa mencari para penggiat IT yang ada di Kota Probolinggo
 
 -   Frontend: `3000`
 -   Backend: `8080`
--
 
 ## Cara jalankan Project di Local
 

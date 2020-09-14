@@ -1,0 +1,11 @@
+query searchCompanyByName($searchKey: String!) {
+	company(where: { name: { _ilike: $searchKey } }) {
+		name
+		description
+		contact
+		address
+		category {
+			name
+		}
+	}
+}

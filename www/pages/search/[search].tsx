@@ -1,13 +1,12 @@
 import { useQuery, gql } from "@apollo/client";
-import { companyType } from "types/company";
 import { ListRenderer } from "components/customList";
 import { Layout } from "antd";
 import styles from "styles/Search.module.css";
 import FormRenderer from "components/form";
-
-type searchResultType = {
-	company: companyType[];
-};
+import {
+	SearchCompanyByNameDocument,
+	SearchCompanyByNameQuery,
+} from "graphqlSchema/types";
 
 export const getServerSideProps = async ({ params }) => {
 	return {
@@ -17,23 +16,9 @@ export const getServerSideProps = async ({ params }) => {
 	};
 };
 
-const Q_GET_SEARCH_BY_NAME = gql`
-	query searchCompanyByName($searchKey: String!) {
-		company(where: { name: { _ilike: $searchKey } }) {
-			name
-			description
-			contact
-			address
-			category {
-				name
-			}
-		}
-	}
-`;
-
 const Search = ({ searchKey }) => {
-	const { loading, data, error } = useQuery<searchResultType>(
-		Q_GET_SEARCH_BY_NAME,
+	const { loading, data, error } = useQuery<SearchCompanyByNameQuery>(
+		SearchCompanyByNameDocument,
 		{
 			variables: {
 				searchKey: `%${searchKey}%`,
