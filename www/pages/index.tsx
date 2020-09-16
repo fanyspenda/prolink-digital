@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
-import { Card, Space, Input, Button, Form, Row, Col, Layout } from "antd";
+import { Card, Typography, Row, Col, Layout, Menu, Button } from "antd";
 import {
 	RiPencilRuler2Fill,
 	RiMovie2Fill,
@@ -16,6 +16,7 @@ import { CategoriesDocument, CategoriesQuery } from "graphqlSchema/types";
 export default function Home() {
 	const { data, loading } = useQuery<CategoriesQuery>(CategoriesDocument);
 	const { Meta } = Card;
+	const { Title, Text } = Typography;
 
 	const IconManager = (categoryName: string) => {
 		if (categoryName == "animasi")
@@ -61,50 +62,99 @@ export default function Home() {
 		);
 	};
 
-	const CardRenderer = () => (
-		<div
-			style={{
-				marginTop: "20px",
-			}}
-		>
-			<p
+	const CardRenderer = () => {
+		return (
+			<div
 				style={{
-					fontSize: "15px",
-					fontWeight: "lighter",
+					marginTop: "20px",
 				}}
 			>
-				atau klik kategori di bawah
-			</p>
-			<RiArrowDownSFill color="blue" size="20px" />
-			<br />
+				<p
+					style={{
+						fontSize: "15px",
+						fontWeight: "lighter",
+					}}
+				>
+					atau klik kategori di bawah
+				</p>
+				<RiArrowDownSFill color="blue" size="20px" />
+				<br />
 
-			{!loading && CardManager(data, ["blue", "orange", "purple", "red"])}
-		</div>
-	);
+				{!loading &&
+					CardManager(data, ["blue", "orange", "purple", "red"])}
+			</div>
+		);
+	};
 
-	const HeaderRenderer = () => (
-		<div className={styles.pageHeader}>
-			<h1>
-				<b>Probolinggo Digital</b>
-			</h1>
-			<p style={{ fontSize: "20px", fontWeight: "lighter" }}>
-				kumpulan para penggiat industri IT Bayuangga
-			</p>
-		</div>
-	);
+	const HeaderRenderer = () => {
+		return (
+			<Row
+				align="middle"
+				justify="center"
+				style={{ marginTop: "450px", marginBottom: "100px" }}
+			>
+				<Col style={{ textAlign: "center" }}>
+					<Title style={{ color: "white", fontSize: "50px" }}>
+						Probolinggo{" "}
+						<Text style={{ color: "#F9AE07" }}>Digital</Text>
+					</Title>
+					<Text style={{ color: "white" }}>
+						kumpulan para penggiat industri IT Bayuangga
+					</Text>
+					<br />
+					<br />
+					<br />
+					<Button type="primary" size="large">
+						Lihat Semua Perusahaan
+					</Button>
+				</Col>
+			</Row>
+		);
+	};
+
+	const backgroundRenderer = () => {
+		return (
+			<img
+				src="/bg.png"
+				style={{
+					width: "100%",
+					height: "100%",
+					position: "absolute",
+					objectFit: "cover",
+					zIndex: 0,
+				}}
+			/>
+		);
+	};
+
+	const MenuRenderer = () => {
+		return (
+			<Menu mode="horizontal" style={{ position: "relative" }}>
+				<Menu.Item
+					key="menu1"
+					style={{ fontWeight: "bolder", fontSize: "20px" }}
+				>
+					Prolink <Text style={{ color: "#F9AE07" }}>Digital</Text>
+				</Menu.Item>
+
+				<Menu.Item style={{ float: "right" }}>Tentang Kami</Menu.Item>
+			</Menu>
+		);
+	};
 
 	return (
-		<Layout className={styles.container}>
+		<>
 			<Head>
 				<title>Prolink Digital</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-
-			<Space direction="vertical">
+			<Layout>
+				{backgroundRenderer()}
+				{MenuRenderer()}
 				{HeaderRenderer()}
-				{FormRenderer()}
-				{CardRenderer()}
-			</Space>
-		</Layout>
+				{/* {FormRenderer()} */}
+				{/* {CardRenderer()} */}
+			</Layout>
+		</>
 	);
 }

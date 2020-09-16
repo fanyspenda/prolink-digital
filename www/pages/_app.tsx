@@ -1,6 +1,5 @@
-import "antd/dist/antd.css";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
-import "styles/globals.css";
+import "styles/antd.css";
 
 const graphqlClient = new ApolloClient({
 	uri: "http://localhost:8080/v1/graphql",

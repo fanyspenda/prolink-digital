@@ -9,30 +9,27 @@ const FormRenderer = () => {
 	};
 
 	return (
-		<Form
-			style={{
-				marginTop: "40px",
-				marginLeft: "10px",
-				marginRight: "10px",
-			}}
-			onFinish={handleSubmit}
-		>
-			<Row>
-				<Col span={20}>
-					<Form.Item
-						name="searchContext"
-						style={{ marginRight: "10px" }}
-					>
+		<Form onFinish={handleSubmit}>
+			<Row align="middle" justify="space-around">
+				<Col span={18}>
+					<Form.Item name="searchContext">
 						<Input
 							size="large"
 							placeholder="cari para penggiat teknologi di sini.."
 						/>
 					</Form.Item>
 				</Col>
-				<Col span={4}>
-					<Button block type="primary" size="large" htmlType="submit">
-						Cari
-					</Button>
+				<Col span={5}>
+					<Form.Item>
+						<Button
+							block
+							type="primary"
+							size="large"
+							htmlType="submit"
+						>
+							Cari
+						</Button>
+					</Form.Item>
 				</Col>
 			</Row>
 		</Form>
