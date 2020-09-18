@@ -26,7 +26,7 @@ Situs web dimana kita bisa mencari para penggiat IT yang ada di Kota Probolinggo
 -   Buat image file dari frontend folder(`www/`).
 
 ```cli
-sudo docker build -t fanyspenda/nextjs-md .
+$ sudo docker build -t fanyspenda/nextjs-md .
 ```
 
 -   Jalankan `docker-compose.yml` yang ada pada direktori terluar dengan perintah `sudo docker-compose up -d`. Dengan begitu, service hasura local dan frontend harusnya telah berjalan.

@@ -15,7 +15,11 @@ services:
             - "postgres"
         restart: always
         environment:
-            HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
+            ## enable this to run postgres in local
+            ## HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
+
+            ## enable this to run postgres in cloud
+            HASURA_GRAPHQL_DATABASE_URL: postgres://qcqxfjrnocsbsy:afc1b92817295b1a5cd015b2db2ad66b92fee3620c13275002639951a4e3bb0e@ec2-52-204-20-42.compute-1.amazonaws.com:5432/d90l5mbr1dbqvi
             ## enable the console served by server
             HASURA_GRAPHQL_ENABLE_CONSOLE: "false" # set to "false" to disable console
             ## enable debugging mode. It is recommended to disable this in production
