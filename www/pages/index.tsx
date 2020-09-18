@@ -1,6 +1,15 @@
 import Head from "next/head";
-import Link from "next/link";
-import { Card, Typography, Row, Col, Layout, Menu, Button } from "antd";
+import NextLink from "next/link";
+import {
+	Card,
+	Typography,
+	Row,
+	Col,
+	Layout,
+	Menu,
+	Button,
+	Carousel,
+} from "antd";
 import {
 	RiPencilRuler2Fill,
 	RiMovie2Fill,
@@ -9,24 +18,44 @@ import {
 	RiArrowDownSFill,
 } from "react-icons/ri";
 import { gql, useQuery } from "@apollo/client";
-import styles from "styles/Home.module.css";
+// import styles from "styles/Home.module.css";
 import FormRenderer from "components/form";
-import { CategoriesDocument, CategoriesQuery } from "graphqlSchema/types";
+import {
+	CategoriesQuery,
+	Category,
+	LandingPageDataDocument,
+	LandingPageDataQuery,
+} from "graphqlSchema/types";
+
+type omittedCategory = Omit<Category, "companies" | "companies_aggregate">;
+type OmittedCompany = Omit<LandingPageDataQuery, "category">;
 
 export default function Home() {
-	const { data, loading } = useQuery<CategoriesQuery>(CategoriesDocument);
+	const { data, loading, error } = useQuery<LandingPageDataQuery>(
+		LandingPageDataDocument
+	);
+
 	const { Meta } = Card;
-	const { Title, Text } = Typography;
+	const { Title, Text, Link, Paragraph } = Typography;
 
 	const IconManager = (categoryName: string) => {
 		if (categoryName == "animasi")
-			return <RiMovie2Fill color="blue" size="100px" />;
+			return <RiMovie2Fill size="25px" style={{ marginRight: "10px" }} />;
 		else if (categoryName == "aplikasi")
-			return <RiFileCodeFill color="orange" size="100px" />;
+			return (
+				<RiFileCodeFill size="25px" style={{ marginRight: "10px" }} />
+			);
 		else if (categoryName == "desain")
-			return <RiPencilRuler2Fill color="purple" size="100px" />;
+			return (
+				<RiPencilRuler2Fill
+					size="25px"
+					style={{ marginRight: "10px" }}
+				/>
+			);
 		else if (categoryName == "gim")
-			return <RiGamepadFill color="red" size="100px" />;
+			return (
+				<RiGamepadFill size="25px" style={{ marginRight: "10px" }} />
+			);
 	};
 
 	const CardManager = (categories: CategoriesQuery, colors: string[]) => {
@@ -41,7 +70,7 @@ export default function Home() {
 				}}
 			>
 				{categories.category.map((value, index) => (
-					<Link
+					<NextLink
 						href="/category/[result]"
 						as={`/category/${value.id}`}
 					>
@@ -56,7 +85,7 @@ export default function Home() {
 						>
 							<Meta title={<b>{value.name}</b>} />
 						</Card>
-					</Link>
+					</NextLink>
 				))}
 			</Layout>
 		);
@@ -88,20 +117,15 @@ export default function Home() {
 
 	const HeaderRenderer = () => {
 		return (
-			<Row
-				align="middle"
-				justify="center"
-				style={{ marginTop: "450px", marginBottom: "100px" }}
-			>
+			<Row justify="center" style={{ marginTop: "300px" }}>
 				<Col style={{ textAlign: "center" }}>
-					<Title style={{ color: "white", fontSize: "50px" }}>
+					<Title style={{ color: "white", fontSize: "80px" }}>
 						Probolinggo{" "}
 						<Text style={{ color: "#F9AE07" }}>Digital</Text>
 					</Title>
-					<Text style={{ color: "white" }}>
+					<Text style={{ color: "white", fontSize: "20px" }}>
 						kumpulan para penggiat industri IT Bayuangga
 					</Text>
-					<br />
 					<br />
 					<br />
 					<Button type="primary" size="large">
@@ -121,7 +145,6 @@ export default function Home() {
 					height: "100%",
 					position: "absolute",
 					objectFit: "cover",
-					zIndex: 0,
 				}}
 			/>
 		);
@@ -129,30 +152,167 @@ export default function Home() {
 
 	const MenuRenderer = () => {
 		return (
-			<Menu mode="horizontal" style={{ position: "relative" }}>
+			<Menu
+				mode="horizontal"
+				style={{ position: "relative", padding: "5px 20px" }}
+			>
 				<Menu.Item
 					key="menu1"
-					style={{ fontWeight: "bolder", fontSize: "20px" }}
+					style={{
+						fontWeight: "bolder",
+						fontSize: "20px",
+					}}
 				>
 					Prolink <Text style={{ color: "#F9AE07" }}>Digital</Text>
 				</Menu.Item>
 
-				<Menu.Item style={{ float: "right" }}>Tentang Kami</Menu.Item>
+				<Menu.Item
+					style={{
+						float: "right",
+						fontWeight: "bold",
+					}}
+				>
+					Tentang Kami
+				</Menu.Item>
 			</Menu>
 		);
 	};
 
+	const CategoryRenderer = (categories: omittedCategory[]) => {
+		return (
+			<>
+				<Row justify="center" style={{ marginTop: "15%" }}>
+					<Col>
+						<Title>kategori</Title>
+					</Col>
+				</Row>
+				<br />
+				<br />
+				<Row justify="center" align="middle">
+					{categories.map((category, index) => (
+						<Col flex="200px">
+							<Link
+								style={{
+									display: "inline-flex",
+									justifyContent: "center",
+									alignItems: "center",
+									fontSize: "20px",
+									marginLeft: "50px",
+								}}
+							>
+								{IconManager(category.name)} {category.name}
+							</Link>
+						</Col>
+					))}
+				</Row>
+			</>
+		);
+	};
+
+	const SearchBarRenderer = () => {
+		return (
+			<Layout style={{ marginTop: "10%" }}>
+				<Layout>
+					<img
+						src="/bg.png"
+						style={{
+							width: "100%",
+							minHeight: "350px",
+							maxHeight: "350px",
+							overflow: "hidden",
+							position: "absolute",
+							objectFit: "cover",
+						}}
+					/>
+				</Layout>
+				<Row justify="center" style={{ marginTop: "10vh" }}>
+					<Col>
+						<Title
+							style={{
+								color: "white",
+								textAlign: "center",
+							}}
+						>
+							Cari Industri
+						</Title>
+						<Text style={{ color: "white", fontSize: "15px" }}>
+							kumpulan para penggiat industri IT Bayuangga
+						</Text>
+					</Col>
+				</Row>
+				<div style={{ margin: "40px 30px 0px 30px" }}>
+					{FormRenderer()}
+				</div>
+			</Layout>
+		);
+	};
+
+	const CarouselRenderer = (data: OmittedCompany) => {
+		const companyCards = data.company.map((value) => (
+			<Card
+				cover={<img src="/defaultImage.jpeg" />}
+				// title={<Title>{company.name}</Title>}
+				style={{
+					backgroundColor: "#000",
+					height: "100px",
+					minHeight: "200px",
+				}}
+			>
+				<Title level={3} ellipsis>
+					{value.name}
+				</Title>
+				<Paragraph ellipsis>{value.description}</Paragraph>
+			</Card>
+		));
+		return (
+			<Row
+				justify="center"
+				align="middle"
+				style={{
+					textAlign: "center",
+					marginTop: "140px",
+				}}
+			>
+				<Col span={8} md={{ span: 6 }} style={{ marginRight: "30px" }}>
+					<>
+						<img src="/category.svg" style={{ width: "70%" }} />
+					</>
+
+					<Title>Industri Terdaftar</Title>
+					<Text>
+						Yuk lihat Industri-Industri IT Keren yang sudah
+						berkontribusi untuk kota ini
+					</Text>
+				</Col>
+				<Col
+					span={10}
+					md={{ span: 5 }}
+					style={{
+						textAlign: "center",
+						marginLeft: "30px",
+					}}
+				>
+					<Carousel autoplay={true}>
+						{companyCards.map((companyCard) => companyCard)}
+					</Carousel>
+				</Col>
+			</Row>
+		);
+	};
+
+	error && <p>{error.message}</p>;
 	return (
 		<>
 			<Head>
 				<title>Prolink Digital</title>
-				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<Layout>
 				{backgroundRenderer()}
 				{MenuRenderer()}
 				{HeaderRenderer()}
-				{/* {FormRenderer()} */}
+				{!loading && CategoryRenderer(data.category)}
+				{SearchBarRenderer()}
+				{!loading && CarouselRenderer(data)}
 				{/* {CardRenderer()} */}
 			</Layout>
 		</>

@@ -1,0 +1,15 @@
+query landingPageData {
+	category {
+		id
+		name
+	}
+	company(where: { name: { _ilike: "%stu%" } }) {
+		name
+		description
+		contact
+		address
+		category {
+			name
+		}
+	}
+}

@@ -953,6 +953,24 @@ export type GetCompaniesByCategoryQuery = (
   )> }
 );
 
+export type LandingPageDataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type LandingPageDataQuery = (
+  { __typename?: 'query_root' }
+  & { category: Array<(
+    { __typename?: 'category' }
+    & Pick<Category, 'id' | 'name'>
+  )>, company: Array<(
+    { __typename?: 'company' }
+    & Pick<Company, 'name' | 'description' | 'contact' | 'address'>
+    & { category: (
+      { __typename?: 'category' }
+      & Pick<Category, 'name'>
+    ) }
+  )> }
+);
+
 export type SearchCompanyByNameQueryVariables = Exact<{
   searchKey: Scalars['String'];
 }>;
@@ -1036,6 +1054,43 @@ export function withGetCompaniesByCategory<TProps, TChildProps = {}, TDataName e
     });
 };
 export type GetCompaniesByCategoryQueryResult = ApolloReactCommon.QueryResult<GetCompaniesByCategoryQuery, GetCompaniesByCategoryQueryVariables>;
+export const LandingPageDataDocument = gql`
+    query landingPageData {
+  category {
+    id
+    name
+  }
+  company(where: {name: {_ilike: "%stu%"}}) {
+    name
+    description
+    contact
+    address
+    category {
+      name
+    }
+  }
+}
+    `;
+export type LandingPageDataComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<LandingPageDataQuery, LandingPageDataQueryVariables>, 'query'>;
+
+    export const LandingPageDataComponent = (props: LandingPageDataComponentProps) => (
+      <ApolloReactComponents.Query<LandingPageDataQuery, LandingPageDataQueryVariables> query={LandingPageDataDocument} {...props} />
+    );
+    
+export type LandingPageDataProps<TChildProps = {}, TDataName extends string = 'data'> = {
+      [key in TDataName]: ApolloReactHoc.DataValue<LandingPageDataQuery, LandingPageDataQueryVariables>
+    } & TChildProps;
+export function withLandingPageData<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  LandingPageDataQuery,
+  LandingPageDataQueryVariables,
+  LandingPageDataProps<TChildProps, TDataName>>) {
+    return ApolloReactHoc.withQuery<TProps, LandingPageDataQuery, LandingPageDataQueryVariables, LandingPageDataProps<TChildProps, TDataName>>(LandingPageDataDocument, {
+      alias: 'landingPageData',
+      ...operationOptions
+    });
+};
+export type LandingPageDataQueryResult = ApolloReactCommon.QueryResult<LandingPageDataQuery, LandingPageDataQueryVariables>;
 export const SearchCompanyByNameDocument = gql`
     query searchCompanyByName($searchKey: String!) {
   company(where: {name: {_ilike: $searchKey}}) {

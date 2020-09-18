@@ -10,10 +10,11 @@ const FormRenderer = () => {
 
 	return (
 		<Form onFinish={handleSubmit}>
-			<Row align="middle" justify="space-around">
-				<Col span={18}>
+			<Row align="middle" justify="center">
+				<Col span={10}>
 					<Form.Item name="searchContext">
 						<Input
+							style={{ background: "transparent" }}
 							size="large"
 							placeholder="cari para penggiat teknologi di sini.."
 						/>
@@ -26,6 +27,7 @@ const FormRenderer = () => {
 							type="primary"
 							size="large"
 							htmlType="submit"
+							style={{ marginLeft: "20px" }}
 						>
 							Cari
 						</Button>

@@ -1,4 +1,4 @@
-import { companyType } from "types/company";
+// import { companyType } from "types/company";
 import { List, Space, Layout } from "antd";
 import { RiPhoneFill, RiBuilding2Fill } from "react-icons/ri";
 
@@ -21,7 +21,8 @@ const ContactRenderer = (text: string) => {
 };
 
 export const ListRenderer = (
-	companies: companyType[],
+	// companies: companyType[],
+	companies: any[],
 	totalData: number,
 	searchKey: string
 ) => {
