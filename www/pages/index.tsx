@@ -9,6 +9,7 @@ import {
 	Menu,
 	Button,
 	Carousel,
+	Space,
 } from "antd";
 import {
 	RiPencilRuler2Fill,
@@ -40,22 +41,20 @@ export default function Home() {
 
 	const IconManager = (categoryName: string) => {
 		if (categoryName == "animasi")
-			return <RiMovie2Fill size="25px" style={{ marginRight: "10px" }} />;
+			return <RiMovie2Fill size="40%" style={{ marginRight: "10px" }} />;
 		else if (categoryName == "aplikasi")
 			return (
-				<RiFileCodeFill size="25px" style={{ marginRight: "10px" }} />
+				<RiFileCodeFill size="40%" style={{ marginRight: "10px" }} />
 			);
 		else if (categoryName == "desain")
 			return (
 				<RiPencilRuler2Fill
-					size="25px"
+					size="40%"
 					style={{ marginRight: "10px" }}
 				/>
 			);
 		else if (categoryName == "gim")
-			return (
-				<RiGamepadFill size="25px" style={{ marginRight: "10px" }} />
-			);
+			return <RiGamepadFill size="40%" style={{ marginRight: "10px" }} />;
 	};
 
 	const CardManager = (categories: CategoriesQuery, colors: string[]) => {
@@ -180,32 +179,51 @@ export default function Home() {
 
 	const CategoryRenderer = (categories: omittedCategory[]) => {
 		return (
-			<>
-				<Row justify="center" style={{ marginTop: "15%" }}>
-					<Col>
-						<Title>kategori</Title>
-					</Col>
-				</Row>
-				<br />
-				<br />
-				<Row justify="center" align="middle">
-					{categories.map((category, index) => (
-						<Col flex="200px">
-							<Link
-								style={{
-									display: "inline-flex",
-									justifyContent: "center",
-									alignItems: "center",
-									fontSize: "20px",
-									marginLeft: "50px",
+			<Row
+				justify="center"
+				align="middle"
+				style={{
+					textAlign: "center",
+					marginTop: "20%",
+				}}
+			>
+				<Col span={8} md={{ span: 6 }} style={{ marginRight: "30px" }}>
+					<img src="/categories.svg" style={{ width: "70%" }} />
+					<Title>kategori</Title>
+					<Text>
+						Industri IT di Probolinggo bergerak di bidang apa ajah
+						sih? yuk klik di bagian kategori.
+					</Text>
+				</Col>
+				<Col
+					span={10}
+					md={{ span: 5 }}
+					style={{
+						textAlign: "center",
+						marginLeft: "30px",
+					}}
+				>
+					<Carousel autoplay>
+						{categories.map((category) => (
+							<Card
+								bodyStyle={{
+									paddingBottom: "100px",
 								}}
 							>
-								{IconManager(category.name)} {category.name}
-							</Link>
-						</Col>
-					))}
-				</Row>
-			</>
+								<Title level={4}>
+									<Link>
+										<Space direction="vertical">
+											{IconManager(category.name)}
+
+											{category.name}
+										</Space>
+									</Link>
+								</Title>
+							</Card>
+						))}
+					</Carousel>
+				</Col>
+			</Row>
 		);
 	};
 
@@ -275,7 +293,7 @@ export default function Home() {
 			>
 				<Col span={8} md={{ span: 6 }} style={{ marginRight: "30px" }}>
 					<>
-						<img src="/category.svg" style={{ width: "70%" }} />
+						<img src="/company.svg" style={{ width: "70%" }} />
 					</>
 
 					<Title>Industri Terdaftar</Title>
