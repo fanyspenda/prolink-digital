@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery, gql } from "@apollo/client";
-import FormRenderer from "components/form";
+import SearchBarRenderer from "components/styledForm";
 import { ListRenderer } from "components/customList";
 import styles from "styles/Search.module.css";
 import { Layout } from "antd";
@@ -30,11 +30,8 @@ const Result = ({ result }) => {
 	return (
 		!loading && (
 			<>
-				<Layout
-					className={styles.container}
-					style={{ marginBottom: "10px" }}
-				>
-					{FormRenderer()}
+				<Layout style={{ marginBottom: "90px", minHeight: "100%" }}>
+					{SearchBarRenderer()}
 				</Layout>
 				<Layout className={styles.container}>
 					{ListRenderer(

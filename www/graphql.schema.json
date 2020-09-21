@@ -515,6 +515,18 @@
             "deprecationReason": null
           },
           {
+            "name": "description",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "id",
             "description": null,
             "args": [],
@@ -1044,6 +1056,16 @@
             "defaultValue": null
           },
           {
+            "name": "description",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "String_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "id",
             "description": null,
             "type": {
@@ -1123,6 +1145,16 @@
             "defaultValue": null
           },
           {
+            "name": "description",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "id",
             "description": null,
             "type": {
@@ -1152,6 +1184,18 @@
         "name": "category_max_fields",
         "description": "aggregate max on columns",
         "fields": [
+          {
+            "name": "description",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "id",
             "description": null,
@@ -1189,6 +1233,16 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "description",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "id",
             "description": null,
             "type": {
@@ -1218,6 +1272,18 @@
         "name": "category_min_fields",
         "description": "aggregate min on columns",
         "fields": [
+          {
+            "name": "description",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "id",
             "description": null,
@@ -1254,6 +1320,16 @@
         "description": "order by min() on columns of table \"category\"",
         "fields": null,
         "inputFields": [
+          {
+            "name": "description",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
           {
             "name": "id",
             "description": null,
@@ -1439,6 +1515,16 @@
             "defaultValue": null
           },
           {
+            "name": "description",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "id",
             "description": null,
             "type": {
@@ -1497,6 +1583,12 @@
         "interfaces": null,
         "enumValues": [
           {
+            "name": "description",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "id",
             "description": "column name",
             "isDeprecated": false,
@@ -1517,6 +1609,16 @@
         "description": "input type for updating data in table \"category\"",
         "fields": null,
         "inputFields": [
+          {
+            "name": "description",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
           {
             "name": "id",
             "description": null,
@@ -1726,6 +1828,12 @@
         "inputFields": null,
         "interfaces": null,
         "enumValues": [
+          {
+            "name": "description",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "id",
             "description": "column name",
@@ -1966,6 +2074,18 @@
                 "name": "Int",
                 "ofType": null
               }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "logo_url",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -2546,6 +2666,16 @@
             "defaultValue": null
           },
           {
+            "name": "logo_url",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "String_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "name",
             "description": null,
             "type": {
@@ -2675,6 +2805,16 @@
             "defaultValue": null
           },
           {
+            "name": "logo_url",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "name",
             "description": null,
             "type": {
@@ -2755,6 +2895,18 @@
             "deprecationReason": null
           },
           {
+            "name": "logo_url",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "name",
             "description": null,
             "args": [],
@@ -2820,6 +2972,16 @@
           },
           {
             "name": "id",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "logo_url",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -2909,6 +3071,18 @@
             "deprecationReason": null
           },
           {
+            "name": "logo_url",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "name",
             "description": null,
             "args": [],
@@ -2974,6 +3148,16 @@
           },
           {
             "name": "id",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "logo_url",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -3207,6 +3391,16 @@
             "defaultValue": null
           },
           {
+            "name": "logo_url",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "name",
             "description": null,
             "type": {
@@ -3285,6 +3479,12 @@
             "deprecationReason": null
           },
           {
+            "name": "logo_url",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "name",
             "description": "column name",
             "isDeprecated": false,
@@ -3345,6 +3545,16 @@
             "type": {
               "kind": "SCALAR",
               "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "logo_url",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null
@@ -3662,6 +3872,12 @@
           },
           {
             "name": "id",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "logo_url",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null

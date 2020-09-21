@@ -1,6 +1,6 @@
 overwrite: true
 schema:
-    - "http://localhost:8080/v1/graphql":
+    - "https://funny-fowl-55.hasura.app/v1/graphql":
           headers:
               x-hasura-admin-secret: adminsecret
 documents: "graphqlSchema/**/*.graphql"

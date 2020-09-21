@@ -54,6 +54,7 @@ export type Category = {
   companies: Array<Company>;
   /** An aggregated array relationship */
   companies_aggregate: Company_Aggregate;
+  description?: Maybe<Scalars['String']>;
   id: Scalars['Int'];
   name: Scalars['String'];
 };
@@ -146,6 +147,7 @@ export type Category_Bool_Exp = {
   _not?: Maybe<Category_Bool_Exp>;
   _or?: Maybe<Array<Maybe<Category_Bool_Exp>>>;
   companies?: Maybe<Company_Bool_Exp>;
+  description?: Maybe<String_Comparison_Exp>;
   id?: Maybe<Int_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
 };
@@ -164,6 +166,7 @@ export type Category_Inc_Input = {
 /** input type for inserting data into table "category" */
 export type Category_Insert_Input = {
   companies?: Maybe<Company_Arr_Rel_Insert_Input>;
+  description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
 };
@@ -171,12 +174,14 @@ export type Category_Insert_Input = {
 /** aggregate max on columns */
 export type Category_Max_Fields = {
   __typename?: 'category_max_fields';
+  description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
 };
 
 /** order by max() on columns of table "category" */
 export type Category_Max_Order_By = {
+  description?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
 };
@@ -184,12 +189,14 @@ export type Category_Max_Order_By = {
 /** aggregate min on columns */
 export type Category_Min_Fields = {
   __typename?: 'category_min_fields';
+  description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
 };
 
 /** order by min() on columns of table "category" */
 export type Category_Min_Order_By = {
+  description?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
 };
@@ -219,6 +226,7 @@ export type Category_On_Conflict = {
 /** ordering options when selecting data from "category" */
 export type Category_Order_By = {
   companies_aggregate?: Maybe<Company_Aggregate_Order_By>;
+  description?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
 };
@@ -231,6 +239,8 @@ export type Category_Pk_Columns_Input = {
 /** select columns of table "category" */
 export enum Category_Select_Column {
   /** column name */
+  Description = 'description',
+  /** column name */
   Id = 'id',
   /** column name */
   Name = 'name'
@@ -238,6 +248,7 @@ export enum Category_Select_Column {
 
 /** input type for updating data in table "category" */
 export type Category_Set_Input = {
+  description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
 };
@@ -289,6 +300,8 @@ export type Category_Sum_Order_By = {
 /** update columns of table "category" */
 export enum Category_Update_Column {
   /** column name */
+  Description = 'description',
+  /** column name */
   Id = 'id',
   /** column name */
   Name = 'name'
@@ -337,6 +350,7 @@ export type Company = {
   contact: Scalars['String'];
   description?: Maybe<Scalars['String']>;
   id: Scalars['Int'];
+  logo_url?: Maybe<Scalars['String']>;
   name: Scalars['String'];
 };
 
@@ -415,6 +429,7 @@ export type Company_Bool_Exp = {
   contact?: Maybe<String_Comparison_Exp>;
   description?: Maybe<String_Comparison_Exp>;
   id?: Maybe<Int_Comparison_Exp>;
+  logo_url?: Maybe<String_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
 };
 
@@ -438,6 +453,7 @@ export type Company_Insert_Input = {
   contact?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
+  logo_url?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
 };
 
@@ -449,6 +465,7 @@ export type Company_Max_Fields = {
   contact?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
+  logo_url?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
 };
 
@@ -459,6 +476,7 @@ export type Company_Max_Order_By = {
   contact?: Maybe<Order_By>;
   description?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
+  logo_url?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
 };
 
@@ -470,6 +488,7 @@ export type Company_Min_Fields = {
   contact?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
+  logo_url?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
 };
 
@@ -480,6 +499,7 @@ export type Company_Min_Order_By = {
   contact?: Maybe<Order_By>;
   description?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
+  logo_url?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
 };
 
@@ -513,6 +533,7 @@ export type Company_Order_By = {
   contact?: Maybe<Order_By>;
   description?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
+  logo_url?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
 };
 
@@ -534,6 +555,8 @@ export enum Company_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
+  LogoUrl = 'logo_url',
+  /** column name */
   Name = 'name'
 }
 
@@ -544,6 +567,7 @@ export type Company_Set_Input = {
   contact?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
+  logo_url?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
 };
 
@@ -611,6 +635,8 @@ export enum Company_Update_Column {
   Description = 'description',
   /** column name */
   Id = 'id',
+  /** column name */
+  LogoUrl = 'logo_url',
   /** column name */
   Name = 'name'
 }
@@ -928,7 +954,7 @@ export type CategoriesQuery = (
   { __typename?: 'query_root' }
   & { category: Array<(
     { __typename?: 'category' }
-    & Pick<Category, 'id' | 'name'>
+    & Pick<Category, 'id' | 'name' | 'description'>
   )> }
 );
 
@@ -963,7 +989,7 @@ export type LandingPageDataQuery = (
     & Pick<Category, 'id' | 'name'>
   )>, company: Array<(
     { __typename?: 'company' }
-    & Pick<Company, 'name' | 'description' | 'contact' | 'address'>
+    & Pick<Company, 'name' | 'description' | 'contact' | 'address' | 'logo_url'>
     & { category: (
       { __typename?: 'category' }
       & Pick<Category, 'name'>
@@ -994,6 +1020,7 @@ export const CategoriesDocument = gql`
   category {
     id
     name
+    description
   }
 }
     `;
@@ -1065,6 +1092,7 @@ export const LandingPageDataDocument = gql`
     description
     contact
     address
+    logo_url
     category {
       name
     }

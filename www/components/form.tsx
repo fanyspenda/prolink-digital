@@ -14,7 +14,10 @@ const FormRenderer = () => {
 				<Col span={10}>
 					<Form.Item name="searchContext">
 						<Input
-							style={{ background: "transparent" }}
+							style={{
+								background: "transparent",
+								color: "white",
+							}}
 							size="large"
 							placeholder="cari para penggiat teknologi di sini.."
 						/>

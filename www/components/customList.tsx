@@ -48,7 +48,7 @@ export const ListRenderer = (
 					<List.Item
 						style={{
 							background: "white",
-							border: "2px solid royalblue",
+							border: "2px solid #F9AE07",
 							borderRight: "none",
 							borderLeft: "none",
 							borderBottom: "none",
