@@ -9,6 +9,7 @@ import {
 } from "react-icons/ri";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 const graphqlClient = new ApolloClient({
 	uri: "https://funny-fowl-55.hasura.app/v1/graphql",
@@ -83,6 +84,12 @@ function MyApp({ Component, pageProps }) {
 
 	return (
 		<ApolloProvider client={graphqlClient}>
+			<Head>
+				<link
+					href="https://unpkg.com/tailwindcss@^1.8/dist/tailwind.min.css"
+					rel="stylesheet"
+				/>
+			</Head>
 			{MenuRenderer()}
 			<Component {...pageProps} />
 			<div>{FooterRenderer()}</div>
