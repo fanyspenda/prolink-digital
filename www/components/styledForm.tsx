@@ -9,10 +9,9 @@ const StyledForm = () => {
 				<img
 					src="/bg.png"
 					style={{
-						marginLeft: "0px",
 						width: "100%",
-						minHeight: "350px",
-						maxHeight: "350px",
+						minHeight: "300px",
+						maxHeight: "300px",
 						overflow: "hidden",
 						position: "absolute",
 						objectFit: "cover",

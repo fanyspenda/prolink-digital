@@ -4,6 +4,7 @@ query searchCompanyByName($searchKey: String!) {
 		description
 		contact
 		address
+		logo_url
 		category {
 			name
 		}

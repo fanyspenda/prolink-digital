@@ -970,7 +970,7 @@ export type GetCompaniesByCategoryQuery = (
     & Pick<Category, 'name'>
     & { companies: Array<(
       { __typename?: 'company' }
-      & Pick<Company, 'id' | 'name' | 'description' | 'address' | 'contact'>
+      & Pick<Company, 'id' | 'name' | 'description' | 'address' | 'contact' | 'logo_url'>
       & { category: (
         { __typename?: 'category' }
         & Pick<Category, 'name'>
@@ -1006,7 +1006,7 @@ export type SearchCompanyByNameQuery = (
   { __typename?: 'query_root' }
   & { company: Array<(
     { __typename?: 'company' }
-    & Pick<Company, 'name' | 'description' | 'contact' | 'address'>
+    & Pick<Company, 'name' | 'description' | 'contact' | 'address' | 'logo_url'>
     & { category: (
       { __typename?: 'category' }
       & Pick<Category, 'name'>
@@ -1054,6 +1054,7 @@ export const GetCompaniesByCategoryDocument = gql`
       description
       address
       contact
+      logo_url
       category {
         name
       }
@@ -1126,6 +1127,7 @@ export const SearchCompanyByNameDocument = gql`
     description
     contact
     address
+    logo_url
     category {
       name
     }

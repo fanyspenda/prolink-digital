@@ -7,6 +7,7 @@ query getCompaniesByCategory($id: Int!) {
 			description
 			address
 			contact
+			logo_url
 			category {
 				name
 			}

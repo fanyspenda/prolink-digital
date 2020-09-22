@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import { ListRenderer } from "components/customList";
 import { Layout, Col, Row, Typography } from "antd";
 import SearchBarRenderer from "components/styledForm";
-import styles from "styles/Search.module.css";
+// import styles from "styles/Search.module.css";
 import {
 	SearchCompanyByNameDocument,
 	SearchCompanyByNameQuery,
@@ -36,7 +36,8 @@ const Search = ({ searchKey }) => {
 				<Layout style={{ marginBottom: "90px", minHeight: "100%" }}>
 					{SearchBarRenderer()}
 				</Layout>
-				<Layout className={styles.container}>
+				{/* <Layout className={styles.container}> */}
+				<Layout>
 					{ListRenderer(
 						data.company,
 						data.company.length,

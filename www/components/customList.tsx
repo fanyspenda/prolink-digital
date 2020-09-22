@@ -1,6 +1,7 @@
 // import { companyType } from "types/company";
-import { List, Space, Layout } from "antd";
+import { List, Space, Layout, Card, Image } from "antd";
 import { RiPhoneFill, RiBuilding2Fill } from "react-icons/ri";
+import { Company } from "graphqlSchema/types";
 
 const AddressRenderer = (text: string) => {
 	return (
@@ -22,7 +23,7 @@ const ContactRenderer = (text: string) => {
 
 export const ListRenderer = (
 	// companies: companyType[],
-	companies: any[],
+	companies: Company[],
 	totalData: number,
 	searchKey: string
 ) => {
@@ -40,36 +41,15 @@ export const ListRenderer = (
 				hasil :
 			</p>
 
-			<List
-				size="large"
-				itemLayout="vertical"
-				dataSource={companies}
-				renderItem={(company) => (
-					<List.Item
-						style={{
-							background: "white",
-							border: "2px solid #F9AE07",
-							borderRight: "none",
-							borderLeft: "none",
-							borderBottom: "none",
-						}}
-						actions={[
-							AddressRenderer(company.address),
-							ContactRenderer(company.contact),
-						]}
-					>
-						<List.Item.Meta
-							title={
-								<b style={{ fontSize: "20px" }}>
-									{company.name}
-								</b>
-							}
-							description={company.category.name}
+			{companies.map((company) => (
+				<Card className="flex flex-row items-center h-40 bg-white shadow-md m-2 rounded-lg border-2 border-white hover:border-orange-300">
+					<div className="w-32 flex-row items-center">
+						<img
+							src={company.logo_url || "/companyLogo/default.png"}
 						/>
-						{company.description}
-					</List.Item>
-				)}
-			/>
+					</div>
+				</Card>
+			))}
 		</Layout>
 	);
 };
