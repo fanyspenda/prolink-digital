@@ -1,6 +1,6 @@
 version: 2
 # endpoint: http://localhost:8080
-endpoint: https://funny-fowl-55.hasura.app/
+endpoint: https://vital-liger-80.hasura.app/
 metadata_directory: metadata
 # actions:
 # kind: synchronous

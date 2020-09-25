@@ -10,7 +10,7 @@ import {
 } from "react-icons/ri";
 import { useRouter } from "next/router";
 const graphqlClient = new ApolloClient({
-	uri: "https://funny-fowl-55.hasura.app/v1/graphql",
+	uri: "https://vital-liger-80.hasura.app/v1/graphql",
 	headers: {
 		"content-type": "application/json",
 		"x-hasura-admin-secret": "adminsecret",

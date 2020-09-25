@@ -7,6 +7,7 @@ import { Layout } from "antd";
 import {
 	GetCompaniesByCategoryDocument,
 	GetCompaniesByCategoryQuery,
+	Company,
 } from "graphqlSchema/types";
 
 export const getServerSideProps = async ({ params }) => {

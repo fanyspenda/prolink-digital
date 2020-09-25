@@ -970,7 +970,7 @@ export type GetCompaniesByCategoryQuery = (
     & Pick<Category, 'name'>
     & { companies: Array<(
       { __typename?: 'company' }
-      & Pick<Company, 'id' | 'name' | 'description' | 'address' | 'contact' | 'logo_url'>
+      & Pick<Company, 'name' | 'description' | 'contact' | 'address' | 'logo_url'>
       & { category: (
         { __typename?: 'category' }
         & Pick<Category, 'name'>
@@ -1049,11 +1049,10 @@ export const GetCompaniesByCategoryDocument = gql`
   category_by_pk(id: $id) {
     name
     companies {
-      id
       name
       description
-      address
       contact
+      address
       logo_url
       category {
         name
