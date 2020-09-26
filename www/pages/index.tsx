@@ -9,7 +9,7 @@ import {
 	Layout,
 	Button,
 	Carousel,
-	Space,
+	Divider,
 } from "antd";
 import {
 	RiPencilRuler2Fill,
@@ -27,13 +27,31 @@ import {
 
 type omittedCategory = Omit<Category, "companies" | "companies_aggregate">;
 type OmittedCompany = Omit<LandingPageDataQuery, "category">;
+const { Title, Text, Link, Paragraph } = Typography;
+
+const categoryImage = [
+	{
+		icon: [],
+		image: "/category/animation.svg",
+	},
+	{
+		icon: [],
+		image: "/category/application.svg",
+	},
+	{
+		icon: [],
+		image: "/category/design.svg",
+	},
+	{
+		icon: [],
+		image: "/category/game.svg",
+	},
+];
 
 export default function Home() {
 	const { data, loading, error } = useQuery<LandingPageDataQuery>(
 		LandingPageDataDocument
 	);
-
-	const { Title, Text, Link, Paragraph } = Typography;
 
 	const IconManager = (categoryName: string) => {
 		if (categoryName == "animasi")
@@ -98,47 +116,72 @@ export default function Home() {
 	};
 
 	const CategoryRenderer = (categories: omittedCategory[]) => {
+		const newCategories = categories.map(
+			({ name, description, id }, index) => ({
+				id,
+				name,
+				description,
+				image: categoryImage[index].image,
+				icons: categoryImage[index].icon,
+			})
+		);
 		return (
 			<>
-				<Row
-					justify="center"
-					align="middle"
-					style={{
-						padding: "10px 0px",
-						textAlign: "center",
-						marginTop: "30vh",
-					}}
+				{/* image category */}
+				<div
+					className="mt-32 flex flex-col items-center md:items-start text-center justify-center
+				md:flex-row md:mt-48"
 				>
-					<Col span={8} md={{ span: 6 }}>
-						<Title style={{ fontSize: "3vmax" }}>kategori</Title>
-					</Col>
-				</Row>
-				<Row
-					justify="center"
-					align="middle"
-					style={{
-						textAlign: "center",
-						marginTop: "20px",
-					}}
-				>
-					{categories.map((category) => (
-						<Col span={10} md={{ span: 5 }}>
-							<Title level={4}>
-								<NextLink
-									href="/category/[result]"
-									as={`/category/${category.id}`}
-								>
-									<Link>
-										<Space direction="horizontal">
-											{IconManager(category.name)}
-											{category.name}
-										</Space>
-									</Link>
-								</NextLink>
-							</Title>
-						</Col>
-					))}
-				</Row>
+					<div className="w-56 flex flex-col items-center md:w-3/12">
+						<img src="/categories.svg" className="md:h-56" />
+						<Title level={2}>Kategori</Title>
+						<Text>
+							Cek kategori yang tersedia di Prolink Digital
+						</Text>
+					</div>
+
+					{/* divider */}
+					<div className="w-48">
+						<Divider
+							dashed
+							className="border-gray-600 w-48 
+							md:hidden"
+						/>
+						<Divider
+							type="vertical"
+							dashed
+							className="border-gray-600 h-56 hidden 
+							md:inline-block"
+						/>
+					</div>
+
+					{/* carousel categories */}
+					<div className="w-56 md:w-3/12">
+						<Carousel autoplay={true}>
+							{newCategories.map((category) => (
+								<div>
+									<img
+										src={category.image}
+										className="h-40 md:md:w-3/4 md:h-56 m-auto"
+									/>
+									<div>
+										<NextLink
+											href="/category/[result]"
+											as={`/category/${category.id}`}
+										>
+											<Link className="text-2xl font-bold">
+												{category.name}
+											</Link>
+										</NextLink>
+										<Paragraph className="h-40 md:h-20">
+											{category.description}
+										</Paragraph>
+									</div>
+								</div>
+							))}
+						</Carousel>
+					</div>
+				</div>
 			</>
 		);
 	};

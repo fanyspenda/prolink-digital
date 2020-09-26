@@ -986,7 +986,7 @@ export type LandingPageDataQuery = (
   { __typename?: 'query_root' }
   & { category: Array<(
     { __typename?: 'category' }
-    & Pick<Category, 'id' | 'name'>
+    & Pick<Category, 'id' | 'name' | 'description'>
   )>, company: Array<(
     { __typename?: 'company' }
     & Pick<Company, 'name' | 'description' | 'contact' | 'address' | 'logo_url'>
@@ -1086,6 +1086,7 @@ export const LandingPageDataDocument = gql`
   category {
     id
     name
+    description
   }
   company(where: {name: {_ilike: "%stu%"}}) {
     name

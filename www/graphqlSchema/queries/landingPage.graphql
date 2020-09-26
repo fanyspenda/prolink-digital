@@ -2,6 +2,7 @@ query landingPageData {
 	category {
 		id
 		name
+		description
 	}
 	company(where: { name: { _ilike: "%stu%" } }) {
 		name
