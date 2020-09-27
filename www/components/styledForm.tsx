@@ -1,6 +1,6 @@
 import { Layout, Row, Col, Typography } from "antd";
 import FormRenderer from "./form";
-const { Title, Text } = Typography;
+const { Title, Text, Paragraph } = Typography;
 
 const StyledForm = () => {
 	return (
@@ -18,22 +18,17 @@ const StyledForm = () => {
 					}}
 				/>
 			</Layout>
-			<Row justify="center" style={{ marginTop: "10vh" }}>
+			<Row justify="center" className="mt-20 mb-5">
 				<Col>
-					<Title
-						style={{
-							color: "white",
-							textAlign: "center",
-						}}
-					>
+					<h1 className="text-center text-white font-bold text-4xl">
 						Cari Industri
-					</Title>
-					<Text style={{ color: "white", fontSize: "15px" }}>
+					</h1>
+					<Text className="text-white">
 						Yuk cari industri yang kamu inginkan
 					</Text>
 				</Col>
 			</Row>
-			<div style={{ margin: "40px 30px 0px 30px" }}>{FormRenderer()}</div>
+			<div>{FormRenderer()}</div>
 		</Layout>
 	);
 };

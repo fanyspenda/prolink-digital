@@ -9,34 +9,29 @@ const FormRenderer = () => {
 	};
 
 	return (
-		<Form onFinish={handleSubmit}>
-			<Row align="middle" justify="center">
-				<Col span={10}>
-					<Form.Item name="searchContext">
-						<Input
-							style={{
-								background: "transparent",
-								color: "white",
-							}}
-							size="large"
-							placeholder="cari para penggiat teknologi di sini.."
-						/>
-					</Form.Item>
-				</Col>
-				<Col span={5}>
-					<Form.Item>
-						<Button
-							block
-							type="primary"
-							size="large"
-							htmlType="submit"
-							style={{ marginLeft: "20px" }}
-						>
-							Cari
-						</Button>
-					</Form.Item>
-				</Col>
-			</Row>
+		<Form
+			onFinish={handleSubmit}
+			className="flex flex-col justify-center items-center md:flex-row"
+		>
+			<Form.Item name="searchContext" className="md:w-7/12">
+				<Input
+					className="bg-transparent text-white w-64 md:w-full md:mr-2"
+					size="middle"
+					placeholder="cari para penggiat teknologi di sini.."
+				/>
+			</Form.Item>
+
+			<Form.Item className="md:w-3/12">
+				<Button
+					className="w-64 md:w-full md:ml-2"
+					block
+					type="primary"
+					size="middle"
+					htmlType="submit"
+				>
+					Cari
+				</Button>
+			</Form.Item>
 		</Form>
 	);
 };
