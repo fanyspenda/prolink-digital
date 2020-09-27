@@ -1,5 +1,4 @@
 import Head from "next/head";
-
 import NextLink from "next/link";
 import {
 	Card,
@@ -129,34 +128,23 @@ export default function Home() {
 			<>
 				{/* image category */}
 				<div
-					className="mt-32 flex flex-col items-center md:items-start text-center justify-center
-				md:flex-row md:mt-48"
+					className="mt-32 flex flex-col items-center divide-y-4 divide-x-0 divide-gray-600 divide-dashed text-center justify-center
+				md:flex-row md:items-start md:mt-56 md:mb-16 md:divide-x-4 md:divide-y-0"
 				>
-					<div className="w-56 flex flex-col items-center md:w-3/12">
+					<div className="w-56 flex flex-col items-center md:w-2/5 pb-6 md:pr-10">
 						<img src="/categories.svg" className="md:h-56" />
 						<Title level={2}>Kategori</Title>
 						<Text>
-							Cek kategori yang tersedia di Prolink Digital
+							Industri IT di Probolinggo terbagi menjadi beberapa
+							kategori.
+						</Text>
+						<Text>
+							Yuk Geser untuk liat kategori apa ajah yang tersedia
 						</Text>
 					</div>
 
-					{/* divider */}
-					<div className="w-48">
-						<Divider
-							dashed
-							className="border-gray-600 w-48 
-							md:hidden"
-						/>
-						<Divider
-							type="vertical"
-							dashed
-							className="border-gray-600 h-56 hidden 
-							md:inline-block"
-						/>
-					</div>
-
 					{/* carousel categories */}
-					<div className="w-56 md:w-3/12">
+					<div className="w-56 md:w-2/5 pt-6 md:pl-10">
 						<Carousel autoplay={true}>
 							{newCategories.map((category) => (
 								<div>
@@ -187,87 +175,45 @@ export default function Home() {
 	};
 
 	const CompanyRenderer = (data: OmittedCompany) => {
-		const companyCards = data.company.map((value) => (
-			<Card
-				cover={<img src="/defaultImage.jpeg" />}
-				// title={<Title>{company.name}</Title>}
-				style={{
-					backgroundColor: "#000",
-
-					minHeight: "200px",
-				}}
-			>
-				<Title level={3} ellipsis>
-					{value.name}
-				</Title>
-				<Paragraph ellipsis>{value.description}</Paragraph>
-			</Card>
-		));
 		return (
-			<Layout style={{ backgroundColor: "white", paddingBottom: "40px" }}>
-				<Row
-					justify="center"
-					align="middle"
-					style={{
-						textAlign: "center",
-						marginTop: "140px",
-					}}
+			<>
+				{/* image company */}
+				<div
+					className="mt-32 flex flex-col items-center divide-y-4 divide-x-0 divide-gray-600 divide-dashed text-center justify-center
+					 md:items-start md:flex-row md:mt-40 md:divide-x-4 md:divide-y-0 mb-10"
 				>
-					<Col span={24}>
-						<Title>Industri Terdaftar</Title>
-					</Col>
-				</Row>
-				<Row
-					justify="center"
-					align="middle"
-					style={{
-						textAlign: "center",
-					}}
-				>
-					<Col
-						span={8}
-						md={{ span: 6 }}
-						style={{ marginRight: "30px" }}
-					>
-						<Row>
-							<Col>
-								<img
-									src="/company.svg"
-									style={{ width: "70%" }}
-								/>
-							</Col>
-						</Row>
-						<Row
-							style={{
-								marginTop: "40px",
-							}}
-						>
-							<Text>
-								Yuk lihat Industri-Industri IT Keren yang sudah
-								berkontribusi untuk kota ini
-							</Text>
-						</Row>
-					</Col>
-					<Col
-						span={10}
-						md={{ span: 5 }}
-						style={{
-							textAlign: "center",
-							marginLeft: "30px",
-						}}
-					>
-						<Carousel
-							autoplay={true}
-							style={{
-								boxShadow: "2px 2px 3px #aaa",
-								marginBottom: "10px",
-							}}
-						>
-							{companyCards.map((companyCard) => companyCard)}
+					<div className="w-56 flex flex-col items-center pb-10 md:w-2/5 md:pr-20 md:pb-0">
+						<img src="/company.svg" className="md:h-56" />
+						<Title level={2}>Industri IT</Title>
+						<Text>
+							Yuk lihat Industri-Industri IT Keren yang sudah
+							berkontribusi untuk kota ini
+						</Text>
+					</div>
+
+					{/* carousel companies */}
+					<div className="w-56 pt-10 md:w-2/5 md:pl-20 md:pt-0">
+						<Carousel autoplay={true}>
+							{data.company.map((value) => (
+								<div>
+									<div className="h-40 w-40 m-auto flex flex-row items-center justify-center md:w-56 md:h-56">
+										<img src={value.logo_url} />
+									</div>
+									<div>
+										<Title level={2} className="text-black">
+											{value.name}
+										</Title>
+
+										<Paragraph className="md:h-20">
+											{value.description}
+										</Paragraph>
+									</div>
+								</div>
+							))}
 						</Carousel>
-					</Col>
-				</Row>
-			</Layout>
+					</div>
+				</div>
+			</>
 		);
 	};
 
