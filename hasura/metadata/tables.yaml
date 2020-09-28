@@ -16,3 +16,10 @@
   - name: category
     using:
       foreign_key_constraint_on: category_id
+- table:
+    schema: public
+    name: user
+- table:
+    schema: public
+    name: user_role
+  is_enum: true
