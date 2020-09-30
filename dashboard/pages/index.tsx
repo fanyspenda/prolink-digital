@@ -1,12 +1,16 @@
 import Head from "next/head";
-import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth0, Auth0ContextInterface } from "@auth0/auth0-react";
 
 const Home = () => {
-	const { isLoading, isAuthenticated, logout } = useAuth0();
+	const { isLoading, error, isAuthenticated, logout } = useAuth0();
 
-	return (
-		!isLoading &&
-		isAuthenticated && (
+	if (isLoading) {
+		return <p>loading...</p>;
+	} else if (error) {
+		console.log(error);
+		return <p>{error}</p>;
+	} else if (isAuthenticated) {
+		return (
 			<>
 				<Head>
 					<title>Prolink Dashboard</title>
@@ -21,8 +25,8 @@ const Home = () => {
 					Logout
 				</button>
 			</>
-		)
-	);
+		);
+	} else return <p>anda belum login...</p>;
 };
 
 export default Home;

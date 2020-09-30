@@ -19,6 +19,7 @@ const MyApp = ({ Component, pageProps }) => {
 			clientId={auth0clientId}
 			domain={auth0Domain}
 			redirectUri="http://localhost:4000/"
+			audience="https://prolink-digital-api/"
 		>
 			<ApolloProvider client={graphqlClient}>
 				<Component {...pageProps} />
