@@ -19,7 +19,19 @@
 - table:
     schema: public
     name: user
+  object_relationships:
+  - name: user_role
+    using:
+      foreign_key_constraint_on: role
 - table:
     schema: public
     name: user_role
   is_enum: true
+  array_relationships:
+  - name: users
+    using:
+      foreign_key_constraint_on:
+        column: role
+        table:
+          schema: public
+          name: user

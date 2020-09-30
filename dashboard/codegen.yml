@@ -1,0 +1,18 @@
+overwrite: true
+schema:
+    - "https://vital-liger-80.hasura.app/v1/graphql":
+          headers:
+              x-hasura-admin-secret: "adminsecret"
+documents: "graphqlSchema/**/*.graphql"
+generates:
+    graphqlSchema/types.ts:
+        plugins:
+            - "typescript"
+            - "typescript-operations"
+            - "typescript-react-apollo"
+            - "typescript-graphql-files-modules"
+        config:
+            withHooks: true
+    ./graphql.schema.json:
+        plugins:
+            - "introspection"
