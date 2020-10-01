@@ -1,8 +1,19 @@
 import Head from "next/head";
-import { useAuth0, Auth0ContextInterface } from "@auth0/auth0-react";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 const Home = () => {
 	const { isLoading, error, isAuthenticated, logout } = useAuth0();
+	const router = useRouter();
+
+	useEffect(() => {
+		if (!isLoading && !isAuthenticated) {
+			router.push("/login");
+		} else if (!isLoading && isAuthenticated) {
+			router.push("/dashboard");
+		}
+	}, [isLoading, isAuthenticated]);
 
 	if (isLoading) {
 		return <p>loading...</p>;
@@ -10,23 +21,10 @@ const Home = () => {
 		console.log(error);
 		return <p>{error}</p>;
 	} else if (isAuthenticated) {
-		return (
-			<>
-				<Head>
-					<title>Prolink Dashboard</title>
-					<link rel="icon" href="/favicon.ico" />
-				</Head>
-				<h1>this is dashboard for logged user only</h1>
-				<button
-					onClick={() =>
-						logout({ returnTo: "http://localhost:4000/login" })
-					}
-				>
-					Logout
-				</button>
-			</>
-		);
-	} else return <p>anda belum login...</p>;
+		return <p>Menghubungkan ke dashboard...</p>;
+	} else {
+		return <p>anda belum login</p>;
+	}
 };
 
 export default Home;
