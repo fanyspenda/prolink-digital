@@ -3,14 +3,14 @@ schema:
     - "https://vital-liger-80.hasura.app/v1/graphql":
           headers:
               x-hasura-admin-secret: "adminsecret"
+              x-hasura-role: "admin"
 documents: "graphqlSchema/**/*.graphql"
 generates:
-    graphqlSchema/types.ts:
+    graphqlSchema/types.tsx:
         plugins:
             - "typescript"
             - "typescript-operations"
             - "typescript-react-apollo"
-            - "typescript-graphql-files-modules"
         config:
             withHooks: true
     ./graphql.schema.json:

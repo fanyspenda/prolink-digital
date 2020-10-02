@@ -9,6 +9,14 @@
         table:
           schema: public
           name: company
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - description
+      - id
+      - name
+      filter: {}
 - table:
     schema: public
     name: company
@@ -16,6 +24,36 @@
   - name: category
     using:
       foreign_key_constraint_on: category_id
+  - name: user
+    using:
+      foreign_key_constraint_on: user_id
+  insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+      - address
+      - category_id
+      - contact
+      - description
+      - logo_url
+      - name
+      - user_id
+      backend_only: false
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - address
+      - category_id
+      - contact
+      - description
+      - id
+      - logo_url
+      - name
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
 - table:
     schema: public
     name: user
@@ -23,6 +61,35 @@
   - name: user_role
     using:
       foreign_key_constraint_on: role
+  array_relationships:
+  - name: companies
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          schema: public
+          name: company
+  select_permissions:
+  - role: user
+    permission:
+      columns:
+      - id
+      - name
+      - email
+      - role
+      filter:
+        id:
+          _eq: X-Hasura-User-id
+  update_permissions:
+  - role: user
+    permission:
+      columns:
+      - email
+      - name
+      filter:
+        id:
+          _eq: X-Hasura-User-id
+      check: null
 - table:
     schema: public
     name: user_role

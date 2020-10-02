@@ -1,0 +1,7 @@
+query getUserInfo {
+	user {
+		id
+		name
+		role
+	}
+}
