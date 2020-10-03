@@ -57,19 +57,19 @@ const EditCompany = ({ companyId }) => {
 
 	if (loading)
 		return (
-			<DashboardMenu menu="industry" subMenu="addIndustry">
+			<DashboardMenu menu="industry" subMenu="viewIndustry">
 				<p>loading</p>
 			</DashboardMenu>
 		);
 	else if (error)
 		return (
-			<DashboardMenu menu="industry" subMenu="addIndustry">
+			<DashboardMenu menu="industry" subMenu="viewIndustry">
 				<p>{error.message}</p>
 			</DashboardMenu>
 		);
 	else
 		return (
-			<DashboardMenu menu="industry" subMenu="addIndustry">
+			<DashboardMenu menu="industry" subMenu="viewIndustry">
 				<CompanyForm
 					isEdit={true}
 					categoryData={data}

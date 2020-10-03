@@ -14,7 +14,8 @@ const Dashboard = () => {
 	const contextUser = useContext(userContext);
 
 	const { loading, data, error } = useGetUserInfoQuery({
-		context: hasuraHeader(user.sub),
+		fetchPolicy: "network-only",
+		context: hasuraHeader(user.sub, "user"),
 		onCompleted: ({ user }) => {
 			contextUser.setter({ id: user[0].id, role: user[0].role });
 		},
