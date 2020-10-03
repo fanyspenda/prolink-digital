@@ -1,0 +1,12 @@
+query getCompanyByPK($id: String!) {
+	company_by_pk(id: $id) {
+		name
+		description
+		category {
+			id
+			name
+		}
+		address
+		contact
+	}
+}

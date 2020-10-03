@@ -1,18 +1,13 @@
 import { DashboardMenu } from "components/dashboardMenu";
-import { Typography, Form, Input, Select, Button } from "antd";
+import { Typography, Input, Select } from "antd";
 import {
-	useGetCategoriesQuery,
-	useInsertCompanyMutation,
+	useGetEditCompanyDataQuery,
+	useUpdateCompanyByPkMutation,
 } from "graphqlSchema/types";
 import { hasuraHeader } from "environtment";
 import { useContext } from "react";
 import { userContext } from "context/userContext";
-import { v4 as uuidv4 } from "uuid";
 import { CompanyForm } from "components/companyForm";
-
-const { Title, Paragraph } = Typography;
-const { TextArea } = Input;
-const { Option } = Select;
 
 type formValues = {
 	name: string;
@@ -22,25 +17,35 @@ type formValues = {
 	description: string;
 };
 
-const CreateCompany = () => {
+export const getServerSideProps = async ({ params }) => {
+	return {
+		props: {
+			companyId: params.companyEdit,
+		},
+	};
+};
+
+const EditCompany = ({ companyId }) => {
 	const userData = useContext(userContext);
-	const { data, loading, error } = useGetCategoriesQuery({
+	const { data, loading, error } = useGetEditCompanyDataQuery({
 		context: hasuraHeader(userData.user.id, userData.user.role),
+		variables: {
+			companyId,
+		},
 	});
 	const [
-		insertCompany,
-		{ loading: mLoading, data: mData, error: mError },
-	] = useInsertCompanyMutation();
+		updateCompany,
+		{ loading: mLoading, error: mError },
+	] = useUpdateCompanyByPkMutation();
 	const handleSubmit = (values: formValues) => {
-		insertCompany({
+		updateCompany({
 			variables: {
-				id: uuidv4(),
-				userId: userData.user.id,
+				id: companyId,
 				name: values.name,
 				description: values.description,
 				address: values.address,
 				contact: values.contact,
-				categoryId: values.category,
+				category_id: values.category,
 			},
 		});
 	};
@@ -61,14 +66,21 @@ const CreateCompany = () => {
 		return (
 			<DashboardMenu menu="industry" subMenu="addIndustry">
 				<CompanyForm
-					isEdit={false}
+					isEdit={true}
 					categoryData={data}
 					submitError={mError}
 					submitLoading={mLoading}
 					handleSubmit={handleSubmit}
+					editData={{
+						address: data.company_by_pk.address,
+						contact: data.company_by_pk.contact,
+						name: data.company_by_pk.name,
+						description: data.company_by_pk.description,
+						category: data.company_by_pk.category.id,
+					}}
 				/>
 			</DashboardMenu>
 		);
 };
 
-export default CreateCompany;
+export default EditCompany;

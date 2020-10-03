@@ -3,11 +3,18 @@ import { Typography, List, Avatar, Button } from "antd";
 import { hasuraHeader } from "environtment";
 import { useContext } from "react";
 import { userContext } from "context/userContext";
-import { useGetCompaniesQuery } from "graphqlSchema/types";
+import {
+	useGetCompaniesQuery,
+	Category,
+	Company as CompanyTypes,
+} from "graphqlSchema/types";
+import { useRouter } from "next/router";
+import NextLink from "next/link";
 
 const { Title, Paragraph } = Typography;
 
 const Company = () => {
+	const router = useRouter();
 	const userData = useContext(userContext);
 	const { data, loading, error } = useGetCompaniesQuery({
 		fetchPolicy: "network-only",
@@ -47,7 +54,12 @@ const Company = () => {
 								}
 								description={item.description}
 							/>
-							<Button>Edit</Button>
+							<NextLink
+								href="/dashboard/company/[companyEdit]"
+								as={`/dashboard/company/${item.id}`}
+							>
+								<Button>Edit</Button>
+							</NextLink>
 							<Button>Delete</Button>
 						</List.Item>
 					)}

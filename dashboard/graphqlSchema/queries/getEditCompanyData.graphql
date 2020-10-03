@@ -1,0 +1,17 @@
+query getEditCompanyData($companyId: String!) {
+	company_by_pk(id: $companyId) {
+		name
+		description
+		category {
+			id
+			name
+		}
+		address
+		contact
+	}
+
+	category {
+		id
+		name
+	}
+}

@@ -55,6 +55,20 @@
       filter:
         user_id:
           _eq: X-Hasura-User-Id
+  update_permissions:
+  - role: user
+    permission:
+      columns:
+      - address
+      - category_id
+      - contact
+      - description
+      - logo_url
+      - name
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+      check: null
 - table:
     schema: public
     name: user

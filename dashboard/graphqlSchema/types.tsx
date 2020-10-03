@@ -1580,6 +1580,24 @@ export type InsertCompanyMutation = (
   )> }
 );
 
+export type UpdateCompanyByPkMutationVariables = Exact<{
+  id: Scalars['String'];
+  name: Scalars['String'];
+  description: Scalars['String'];
+  address: Scalars['String'];
+  category_id: Scalars['Int'];
+  contact: Scalars['String'];
+}>;
+
+
+export type UpdateCompanyByPkMutation = (
+  { __typename?: 'mutation_root' }
+  & { update_company_by_pk?: Maybe<(
+    { __typename?: 'company' }
+    & Pick<Company, 'id'>
+  )> }
+);
+
 export type GetCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1603,6 +1621,43 @@ export type GetCompaniesQuery = (
       { __typename?: 'category' }
       & Pick<Category, 'name'>
     ) }
+  )> }
+);
+
+export type GetCompanyByPkQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type GetCompanyByPkQuery = (
+  { __typename?: 'query_root' }
+  & { company_by_pk?: Maybe<(
+    { __typename?: 'company' }
+    & Pick<Company, 'name' | 'description' | 'address' | 'contact'>
+    & { category: (
+      { __typename?: 'category' }
+      & Pick<Category, 'id' | 'name'>
+    ) }
+  )> }
+);
+
+export type GetEditCompanyDataQueryVariables = Exact<{
+  companyId: Scalars['String'];
+}>;
+
+
+export type GetEditCompanyDataQuery = (
+  { __typename?: 'query_root' }
+  & { company_by_pk?: Maybe<(
+    { __typename?: 'company' }
+    & Pick<Company, 'name' | 'description' | 'address' | 'contact'>
+    & { category: (
+      { __typename?: 'category' }
+      & Pick<Category, 'id' | 'name'>
+    ) }
+  )>, category: Array<(
+    { __typename?: 'category' }
+    & Pick<Category, 'id' | 'name'>
   )> }
 );
 
@@ -1656,6 +1711,43 @@ export function useInsertCompanyMutation(baseOptions?: Apollo.MutationHookOption
 export type InsertCompanyMutationHookResult = ReturnType<typeof useInsertCompanyMutation>;
 export type InsertCompanyMutationResult = Apollo.MutationResult<InsertCompanyMutation>;
 export type InsertCompanyMutationOptions = Apollo.BaseMutationOptions<InsertCompanyMutation, InsertCompanyMutationVariables>;
+export const UpdateCompanyByPkDocument = gql`
+    mutation updateCompanyByPK($id: String!, $name: String!, $description: String!, $address: String!, $category_id: Int!, $contact: String!) {
+  update_company_by_pk(pk_columns: {id: $id}, _set: {name: $name, description: $description, address: $address, category_id: $category_id, contact: $contact}) {
+    id
+  }
+}
+    `;
+export type UpdateCompanyByPkMutationFn = Apollo.MutationFunction<UpdateCompanyByPkMutation, UpdateCompanyByPkMutationVariables>;
+
+/**
+ * __useUpdateCompanyByPkMutation__
+ *
+ * To run a mutation, you first call `useUpdateCompanyByPkMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateCompanyByPkMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateCompanyByPkMutation, { data, loading, error }] = useUpdateCompanyByPkMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      name: // value for 'name'
+ *      description: // value for 'description'
+ *      address: // value for 'address'
+ *      category_id: // value for 'category_id'
+ *      contact: // value for 'contact'
+ *   },
+ * });
+ */
+export function useUpdateCompanyByPkMutation(baseOptions?: Apollo.MutationHookOptions<UpdateCompanyByPkMutation, UpdateCompanyByPkMutationVariables>) {
+        return Apollo.useMutation<UpdateCompanyByPkMutation, UpdateCompanyByPkMutationVariables>(UpdateCompanyByPkDocument, baseOptions);
+      }
+export type UpdateCompanyByPkMutationHookResult = ReturnType<typeof useUpdateCompanyByPkMutation>;
+export type UpdateCompanyByPkMutationResult = Apollo.MutationResult<UpdateCompanyByPkMutation>;
+export type UpdateCompanyByPkMutationOptions = Apollo.BaseMutationOptions<UpdateCompanyByPkMutation, UpdateCompanyByPkMutationVariables>;
 export const GetCategoriesDocument = gql`
     query getCategories {
   category {
@@ -1729,6 +1821,90 @@ export function useGetCompaniesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
 export type GetCompaniesQueryHookResult = ReturnType<typeof useGetCompaniesQuery>;
 export type GetCompaniesLazyQueryHookResult = ReturnType<typeof useGetCompaniesLazyQuery>;
 export type GetCompaniesQueryResult = Apollo.QueryResult<GetCompaniesQuery, GetCompaniesQueryVariables>;
+export const GetCompanyByPkDocument = gql`
+    query getCompanyByPK($id: String!) {
+  company_by_pk(id: $id) {
+    name
+    description
+    category {
+      id
+      name
+    }
+    address
+    contact
+  }
+}
+    `;
+
+/**
+ * __useGetCompanyByPkQuery__
+ *
+ * To run a query within a React component, call `useGetCompanyByPkQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetCompanyByPkQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetCompanyByPkQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetCompanyByPkQuery(baseOptions?: Apollo.QueryHookOptions<GetCompanyByPkQuery, GetCompanyByPkQueryVariables>) {
+        return Apollo.useQuery<GetCompanyByPkQuery, GetCompanyByPkQueryVariables>(GetCompanyByPkDocument, baseOptions);
+      }
+export function useGetCompanyByPkLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetCompanyByPkQuery, GetCompanyByPkQueryVariables>) {
+          return Apollo.useLazyQuery<GetCompanyByPkQuery, GetCompanyByPkQueryVariables>(GetCompanyByPkDocument, baseOptions);
+        }
+export type GetCompanyByPkQueryHookResult = ReturnType<typeof useGetCompanyByPkQuery>;
+export type GetCompanyByPkLazyQueryHookResult = ReturnType<typeof useGetCompanyByPkLazyQuery>;
+export type GetCompanyByPkQueryResult = Apollo.QueryResult<GetCompanyByPkQuery, GetCompanyByPkQueryVariables>;
+export const GetEditCompanyDataDocument = gql`
+    query getEditCompanyData($companyId: String!) {
+  company_by_pk(id: $companyId) {
+    name
+    description
+    category {
+      id
+      name
+    }
+    address
+    contact
+  }
+  category {
+    id
+    name
+  }
+}
+    `;
+
+/**
+ * __useGetEditCompanyDataQuery__
+ *
+ * To run a query within a React component, call `useGetEditCompanyDataQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetEditCompanyDataQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetEditCompanyDataQuery({
+ *   variables: {
+ *      companyId: // value for 'companyId'
+ *   },
+ * });
+ */
+export function useGetEditCompanyDataQuery(baseOptions?: Apollo.QueryHookOptions<GetEditCompanyDataQuery, GetEditCompanyDataQueryVariables>) {
+        return Apollo.useQuery<GetEditCompanyDataQuery, GetEditCompanyDataQueryVariables>(GetEditCompanyDataDocument, baseOptions);
+      }
+export function useGetEditCompanyDataLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetEditCompanyDataQuery, GetEditCompanyDataQueryVariables>) {
+          return Apollo.useLazyQuery<GetEditCompanyDataQuery, GetEditCompanyDataQueryVariables>(GetEditCompanyDataDocument, baseOptions);
+        }
+export type GetEditCompanyDataQueryHookResult = ReturnType<typeof useGetEditCompanyDataQuery>;
+export type GetEditCompanyDataLazyQueryHookResult = ReturnType<typeof useGetEditCompanyDataLazyQuery>;
+export type GetEditCompanyDataQueryResult = Apollo.QueryResult<GetEditCompanyDataQuery, GetEditCompanyDataQueryVariables>;
 export const GetUserInfoDocument = gql`
     query getUserInfo {
   user {
