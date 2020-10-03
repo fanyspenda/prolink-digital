@@ -345,7 +345,7 @@ export type Company = {
   category_id: Scalars['Int'];
   contact: Scalars['String'];
   description?: Maybe<Scalars['String']>;
-  id: Scalars['Int'];
+  id: Scalars['String'];
   logo_url?: Maybe<Scalars['String']>;
   name: Scalars['String'];
   /** An object relationship */
@@ -408,13 +408,11 @@ export type Company_Arr_Rel_Insert_Input = {
 export type Company_Avg_Fields = {
   __typename?: 'company_avg_fields';
   category_id?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
 };
 
 /** order by avg() on columns of table "company" */
 export type Company_Avg_Order_By = {
   category_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "company". All fields are combined with a logical 'AND'. */
@@ -427,7 +425,7 @@ export type Company_Bool_Exp = {
   category_id?: Maybe<Int_Comparison_Exp>;
   contact?: Maybe<String_Comparison_Exp>;
   description?: Maybe<String_Comparison_Exp>;
-  id?: Maybe<Int_Comparison_Exp>;
+  id?: Maybe<String_Comparison_Exp>;
   logo_url?: Maybe<String_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
   user?: Maybe<User_Bool_Exp>;
@@ -443,7 +441,6 @@ export enum Company_Constraint {
 /** input type for incrementing integer column in table "company" */
 export type Company_Inc_Input = {
   category_id?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "company" */
@@ -453,7 +450,7 @@ export type Company_Insert_Input = {
   category_id?: Maybe<Scalars['Int']>;
   contact?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['String']>;
   logo_url?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   user?: Maybe<User_Obj_Rel_Insert_Input>;
@@ -467,7 +464,7 @@ export type Company_Max_Fields = {
   category_id?: Maybe<Scalars['Int']>;
   contact?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['String']>;
   logo_url?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   user_id?: Maybe<Scalars['String']>;
@@ -492,7 +489,7 @@ export type Company_Min_Fields = {
   category_id?: Maybe<Scalars['Int']>;
   contact?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['String']>;
   logo_url?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   user_id?: Maybe<Scalars['String']>;
@@ -548,7 +545,7 @@ export type Company_Order_By = {
 
 /** primary key columns input for table: "company" */
 export type Company_Pk_Columns_Input = {
-  id: Scalars['Int'];
+  id: Scalars['String'];
 };
 
 /** select columns of table "company" */
@@ -577,7 +574,7 @@ export type Company_Set_Input = {
   category_id?: Maybe<Scalars['Int']>;
   contact?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['String']>;
   logo_url?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   user_id?: Maybe<Scalars['String']>;
@@ -587,52 +584,44 @@ export type Company_Set_Input = {
 export type Company_Stddev_Fields = {
   __typename?: 'company_stddev_fields';
   category_id?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev() on columns of table "company" */
 export type Company_Stddev_Order_By = {
   category_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
 export type Company_Stddev_Pop_Fields = {
   __typename?: 'company_stddev_pop_fields';
   category_id?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_pop() on columns of table "company" */
 export type Company_Stddev_Pop_Order_By = {
   category_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
 export type Company_Stddev_Samp_Fields = {
   __typename?: 'company_stddev_samp_fields';
   category_id?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_samp() on columns of table "company" */
 export type Company_Stddev_Samp_Order_By = {
   category_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
 };
 
 /** aggregate sum on columns */
 export type Company_Sum_Fields = {
   __typename?: 'company_sum_fields';
   category_id?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
 };
 
 /** order by sum() on columns of table "company" */
 export type Company_Sum_Order_By = {
   category_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
 };
 
 /** update columns of table "company" */
@@ -659,39 +648,33 @@ export enum Company_Update_Column {
 export type Company_Var_Pop_Fields = {
   __typename?: 'company_var_pop_fields';
   category_id?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_pop() on columns of table "company" */
 export type Company_Var_Pop_Order_By = {
   category_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
 export type Company_Var_Samp_Fields = {
   __typename?: 'company_var_samp_fields';
   category_id?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_samp() on columns of table "company" */
 export type Company_Var_Samp_Order_By = {
   category_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
 };
 
 /** aggregate variance on columns */
 export type Company_Variance_Fields = {
   __typename?: 'company_variance_fields';
   category_id?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
 };
 
 /** order by variance() on columns of table "company" */
 export type Company_Variance_Order_By = {
   category_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
 };
 
 /** mutation root */
@@ -768,7 +751,7 @@ export type Mutation_RootDelete_CompanyArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Company_By_PkArgs = {
-  id: Scalars['Int'];
+  id: Scalars['String'];
 };
 
 
@@ -1005,7 +988,7 @@ export type Query_RootCompany_AggregateArgs = {
 
 /** query root */
 export type Query_RootCompany_By_PkArgs = {
-  id: Scalars['Int'];
+  id: Scalars['String'];
 };
 
 
@@ -1138,7 +1121,7 @@ export type Subscription_RootCompany_AggregateArgs = {
 
 /** subscription root */
 export type Subscription_RootCompany_By_PkArgs = {
-  id: Scalars['Int'];
+  id: Scalars['String'];
 };
 
 
@@ -1578,6 +1561,25 @@ export enum User_Update_Column {
   Role = 'role'
 }
 
+export type InsertCompanyMutationVariables = Exact<{
+  id: Scalars['String'];
+  name: Scalars['String'];
+  description: Scalars['String'];
+  categoryId: Scalars['Int'];
+  address: Scalars['String'];
+  contact: Scalars['String'];
+  userId: Scalars['String'];
+}>;
+
+
+export type InsertCompanyMutation = (
+  { __typename?: 'mutation_root' }
+  & { insert_company?: Maybe<(
+    { __typename?: 'company_mutation_response' }
+    & Pick<Company_Mutation_Response, 'affected_rows'>
+  )> }
+);
+
 export type GetCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1601,6 +1603,44 @@ export type GetUserInfoQuery = (
 );
 
 
+export const InsertCompanyDocument = gql`
+    mutation insertCompany($id: String!, $name: String!, $description: String!, $categoryId: Int!, $address: String!, $contact: String!, $userId: String!) {
+  insert_company(objects: {id: $id, name: $name, description: $description, category_id: $categoryId, address: $address, contact: $contact, user_id: $userId}) {
+    affected_rows
+  }
+}
+    `;
+export type InsertCompanyMutationFn = Apollo.MutationFunction<InsertCompanyMutation, InsertCompanyMutationVariables>;
+
+/**
+ * __useInsertCompanyMutation__
+ *
+ * To run a mutation, you first call `useInsertCompanyMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useInsertCompanyMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [insertCompanyMutation, { data, loading, error }] = useInsertCompanyMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      name: // value for 'name'
+ *      description: // value for 'description'
+ *      categoryId: // value for 'categoryId'
+ *      address: // value for 'address'
+ *      contact: // value for 'contact'
+ *      userId: // value for 'userId'
+ *   },
+ * });
+ */
+export function useInsertCompanyMutation(baseOptions?: Apollo.MutationHookOptions<InsertCompanyMutation, InsertCompanyMutationVariables>) {
+        return Apollo.useMutation<InsertCompanyMutation, InsertCompanyMutationVariables>(InsertCompanyDocument, baseOptions);
+      }
+export type InsertCompanyMutationHookResult = ReturnType<typeof useInsertCompanyMutation>;
+export type InsertCompanyMutationResult = Apollo.MutationResult<InsertCompanyMutation>;
+export type InsertCompanyMutationOptions = Apollo.BaseMutationOptions<InsertCompanyMutation, InsertCompanyMutationVariables>;
 export const GetCategoriesDocument = gql`
     query getCategories {
   category {

@@ -1,0 +1,23 @@
+mutation insertCompany(
+	$id: String!
+	$name: String!
+	$description: String!
+	$categoryId: Int!
+	$address: String!
+	$contact: String!
+	$userId: String!
+) {
+	insert_company(
+		objects: {
+			id: $id
+			name: $name
+			description: $description
+			category_id: $categoryId
+			address: $address
+			contact: $contact
+			user_id: $userId
+		}
+	) {
+		affected_rows
+	}
+}

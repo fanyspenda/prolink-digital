@@ -36,6 +36,7 @@
       - category_id
       - contact
       - description
+      - id
       - logo_url
       - name
       - user_id

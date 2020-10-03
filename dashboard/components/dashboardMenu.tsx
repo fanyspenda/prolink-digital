@@ -21,7 +21,9 @@ export const DashboardMenu: React.FunctionComponent<activeMenu> = ({
 		<Layout>
 			<Header style={{ backgroundColor: "white" }}>
 				<Menu mode="horizontal">
-					<Menu.Item>Prolink Digital</Menu.Item>
+					<Menu.Item onClick={() => router.push("/dashboard")}>
+						Prolink Digital
+					</Menu.Item>
 					<Menu.Item
 						style={{ float: "right" }}
 						onClick={() => logout()}
