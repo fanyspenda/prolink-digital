@@ -1,0 +1,5 @@
+mutation deleteCompanyByPK($companyId: String!) {
+	delete_company_by_pk(id: $companyId) {
+		id
+	}
+}

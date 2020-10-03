@@ -11,7 +11,7 @@ type defaultType = {
 export const defaultValue: defaultType = {
 	user: {
 		id: "id",
-		role: "role",
+		role: "user",
 	},
 	setter: () => {},
 };

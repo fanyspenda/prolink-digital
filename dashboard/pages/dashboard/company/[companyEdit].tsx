@@ -1,5 +1,5 @@
 import { DashboardMenu } from "components/dashboardMenu";
-import { Typography, Input, Select } from "antd";
+import { Form } from "antd";
 import {
 	useGetEditCompanyDataQuery,
 	useUpdateCompanyByPkMutation,
@@ -8,6 +8,7 @@ import { hasuraHeader } from "environtment";
 import { useContext } from "react";
 import { userContext } from "context/userContext";
 import { CompanyForm } from "components/companyForm";
+import { useRouter } from "next/router";
 
 type formValues = {
 	name: string;
@@ -26,17 +27,21 @@ export const getServerSideProps = async ({ params }) => {
 };
 
 const EditCompany = ({ companyId }) => {
+	const router = useRouter();
 	const userData = useContext(userContext);
 	const { data, loading, error } = useGetEditCompanyDataQuery({
 		context: hasuraHeader(userData.user.id, userData.user.role),
 		variables: {
 			companyId,
 		},
+		fetchPolicy: "network-only",
 	});
 	const [
 		updateCompany,
 		{ loading: mLoading, error: mError },
-	] = useUpdateCompanyByPkMutation();
+	] = useUpdateCompanyByPkMutation({
+		onCompleted: () => router.push("/dashboard/company"),
+	});
 	const handleSubmit = (values: formValues) => {
 		updateCompany({
 			variables: {

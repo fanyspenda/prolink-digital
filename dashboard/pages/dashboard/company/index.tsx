@@ -5,8 +5,7 @@ import { useContext } from "react";
 import { userContext } from "context/userContext";
 import {
 	useGetCompaniesQuery,
-	Category,
-	Company as CompanyTypes,
+	useDeleteCompanyByPkMutation,
 } from "graphqlSchema/types";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
@@ -16,9 +15,16 @@ const { Title, Paragraph } = Typography;
 const Company = () => {
 	const router = useRouter();
 	const userData = useContext(userContext);
-	const { data, loading, error } = useGetCompaniesQuery({
+	const { data, loading, error, refetch } = useGetCompaniesQuery({
 		fetchPolicy: "network-only",
 		context: hasuraHeader(userData.user.id, userData.user.role),
+	});
+	const [
+		deleteCompany,
+		{ loading: dLoading, error: dError },
+	] = useDeleteCompanyByPkMutation({
+		context: hasuraHeader(userData.user.id, userData.user.role),
+		onCompleted: () => refetch(),
 	});
 
 	if (loading)
@@ -36,6 +42,8 @@ const Company = () => {
 	else
 		return (
 			<DashboardMenu menu="industry" subMenu="viewIndustry">
+				{dLoading && <p>menghapus industri...</p>}
+				{dError && <p>gagal menghapus: {dError.message}</p>}
 				<List
 					dataSource={data.company}
 					renderItem={(item) => (
@@ -60,7 +68,15 @@ const Company = () => {
 							>
 								<Button>Edit</Button>
 							</NextLink>
-							<Button>Delete</Button>
+							<Button
+								onClick={() =>
+									deleteCompany({
+										variables: { companyId: item.id },
+									})
+								}
+							>
+								Delete
+							</Button>
 						</List.Item>
 					)}
 				/>

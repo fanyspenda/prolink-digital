@@ -1561,6 +1561,19 @@ export enum User_Update_Column {
   Role = 'role'
 }
 
+export type DeleteCompanyByPkMutationVariables = Exact<{
+  companyId: Scalars['String'];
+}>;
+
+
+export type DeleteCompanyByPkMutation = (
+  { __typename?: 'mutation_root' }
+  & { delete_company_by_pk?: Maybe<(
+    { __typename?: 'company' }
+    & Pick<Company, 'id'>
+  )> }
+);
+
 export type InsertCompanyMutationVariables = Exact<{
   id: Scalars['String'];
   name: Scalars['String'];
@@ -1673,6 +1686,38 @@ export type GetUserInfoQuery = (
 );
 
 
+export const DeleteCompanyByPkDocument = gql`
+    mutation deleteCompanyByPK($companyId: String!) {
+  delete_company_by_pk(id: $companyId) {
+    id
+  }
+}
+    `;
+export type DeleteCompanyByPkMutationFn = Apollo.MutationFunction<DeleteCompanyByPkMutation, DeleteCompanyByPkMutationVariables>;
+
+/**
+ * __useDeleteCompanyByPkMutation__
+ *
+ * To run a mutation, you first call `useDeleteCompanyByPkMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteCompanyByPkMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteCompanyByPkMutation, { data, loading, error }] = useDeleteCompanyByPkMutation({
+ *   variables: {
+ *      companyId: // value for 'companyId'
+ *   },
+ * });
+ */
+export function useDeleteCompanyByPkMutation(baseOptions?: Apollo.MutationHookOptions<DeleteCompanyByPkMutation, DeleteCompanyByPkMutationVariables>) {
+        return Apollo.useMutation<DeleteCompanyByPkMutation, DeleteCompanyByPkMutationVariables>(DeleteCompanyByPkDocument, baseOptions);
+      }
+export type DeleteCompanyByPkMutationHookResult = ReturnType<typeof useDeleteCompanyByPkMutation>;
+export type DeleteCompanyByPkMutationResult = Apollo.MutationResult<DeleteCompanyByPkMutation>;
+export type DeleteCompanyByPkMutationOptions = Apollo.BaseMutationOptions<DeleteCompanyByPkMutation, DeleteCompanyByPkMutationVariables>;
 export const InsertCompanyDocument = gql`
     mutation insertCompany($id: String!, $name: String!, $description: String!, $categoryId: Int!, $address: String!, $contact: String!, $userId: String!) {
   insert_company(objects: {id: $id, name: $name, description: $description, category_id: $categoryId, address: $address, contact: $contact, user_id: $userId}) {
