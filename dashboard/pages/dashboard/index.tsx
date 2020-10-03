@@ -2,19 +2,22 @@ import Head from "next/head";
 import { withAuthenticationRequired, useAuth0 } from "@auth0/auth0-react";
 import { DashboardMenu } from "components/dashboardMenu";
 import { Layout, Typography } from "antd";
-import {
-	useGetUserInfoLazyQuery,
-	useGetUserInfoQuery,
-} from "graphqlSchema/types";
+import { useGetUserInfoQuery } from "graphqlSchema/types";
 import { hasuraHeader } from "environtment";
+import { userContext } from "context/userContext";
+import { useContext } from "react";
 
 const { Title } = Typography;
 
 const Dashboard = () => {
 	const { user } = useAuth0();
+	const contextUser = useContext(userContext);
 
 	const { loading, data, error } = useGetUserInfoQuery({
-		context: hasuraHeader(user.sub, ""),
+		context: hasuraHeader(user.sub),
+		onCompleted: ({ user }) => {
+			contextUser.setter({ id: user[0].id, role: user[0].role });
+		},
 	});
 
 	if (error)

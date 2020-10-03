@@ -7,6 +7,8 @@ import {
 	HASURA_GRAPHQL,
 	BASE_URL,
 } from "environtment";
+import { userContext } from "context/userContext";
+import { useState } from "react";
 
 const graphqlClient = new ApolloClient({
 	uri: HASURA_GRAPHQL,
@@ -16,7 +18,13 @@ const graphqlClient = new ApolloClient({
 	cache: new InMemoryCache(),
 });
 
+const userDefaultValue = {
+	id: "newId",
+	role: "newRole",
+};
+
 const MyApp = ({ Component, pageProps }) => {
+	const [user, setUser] = useState(userDefaultValue);
 	return (
 		<Auth0Provider
 			clientId={AUTH0_CLIENT_ID}
@@ -25,7 +33,9 @@ const MyApp = ({ Component, pageProps }) => {
 			audience="https://prolink-digital-api/"
 		>
 			<ApolloProvider client={graphqlClient}>
-				<Component {...pageProps} />
+				<userContext.Provider value={{ user, setter: setUser }}>
+					<Component {...pageProps} />
+				</userContext.Provider>
 			</ApolloProvider>
 		</Auth0Provider>
 	);

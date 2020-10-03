@@ -6,6 +6,6 @@ export const BASE_URL = "http://localhost:4000/";
 export const hasuraHeader = (id: string, role?: string) => ({
 	headers: {
 		"X-Hasura-User-Id": id,
-		"x-hasura-role": role,
+		"x-hasura-role": role || "",
 	},
 });
