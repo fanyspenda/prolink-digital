@@ -1591,6 +1591,21 @@ export type GetCategoriesQuery = (
   )> }
 );
 
+export type GetCompaniesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetCompaniesQuery = (
+  { __typename?: 'query_root' }
+  & { company: Array<(
+    { __typename?: 'company' }
+    & Pick<Company, 'id' | 'name' | 'description' | 'address' | 'contact' | 'logo_url'>
+    & { category: (
+      { __typename?: 'category' }
+      & Pick<Category, 'name'>
+    ) }
+  )> }
+);
+
 export type GetUserInfoQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1674,6 +1689,46 @@ export function useGetCategoriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
 export type GetCategoriesQueryHookResult = ReturnType<typeof useGetCategoriesQuery>;
 export type GetCategoriesLazyQueryHookResult = ReturnType<typeof useGetCategoriesLazyQuery>;
 export type GetCategoriesQueryResult = Apollo.QueryResult<GetCategoriesQuery, GetCategoriesQueryVariables>;
+export const GetCompaniesDocument = gql`
+    query getCompanies {
+  company {
+    id
+    name
+    description
+    address
+    contact
+    logo_url
+    category {
+      name
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetCompaniesQuery__
+ *
+ * To run a query within a React component, call `useGetCompaniesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetCompaniesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetCompaniesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetCompaniesQuery(baseOptions?: Apollo.QueryHookOptions<GetCompaniesQuery, GetCompaniesQueryVariables>) {
+        return Apollo.useQuery<GetCompaniesQuery, GetCompaniesQueryVariables>(GetCompaniesDocument, baseOptions);
+      }
+export function useGetCompaniesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetCompaniesQuery, GetCompaniesQueryVariables>) {
+          return Apollo.useLazyQuery<GetCompaniesQuery, GetCompaniesQueryVariables>(GetCompaniesDocument, baseOptions);
+        }
+export type GetCompaniesQueryHookResult = ReturnType<typeof useGetCompaniesQuery>;
+export type GetCompaniesLazyQueryHookResult = ReturnType<typeof useGetCompaniesLazyQuery>;
+export type GetCompaniesQueryResult = Apollo.QueryResult<GetCompaniesQuery, GetCompaniesQueryVariables>;
 export const GetUserInfoDocument = gql`
     query getUserInfo {
   user {

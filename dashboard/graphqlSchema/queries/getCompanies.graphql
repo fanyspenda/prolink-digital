@@ -1,0 +1,13 @@
+query getCompanies {
+	company {
+		id
+		name
+		description
+		address
+		contact
+		logo_url
+		category {
+			name
+		}
+	}
+}
