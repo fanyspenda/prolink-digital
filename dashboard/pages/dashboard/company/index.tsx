@@ -9,6 +9,8 @@ import {
 } from "graphqlSchema/types";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
+import { LoadingErrorHandler } from "components/loadingErrorHandler";
+import Head from "next/head";
 
 const { Title, Paragraph } = Typography;
 
@@ -27,21 +29,22 @@ const Company = () => {
 		onCompleted: () => refetch(),
 	});
 
-	if (loading)
+	if (loading || error)
 		return (
-			<DashboardMenu menu="industry" subMenu="viewIndustry">
-				<p>loading</p>
-			</DashboardMenu>
-		);
-	else if (error)
-		return (
-			<DashboardMenu menu="industry" subMenu="viewIndustry">
-				<p>{error.message}</p>
-			</DashboardMenu>
+			<LoadingErrorHandler
+				error={error}
+				loading={loading}
+				dashboardMenu={{ menu: "industry", subMenu: "viewIndustry" }}
+			/>
 		);
 	else
 		return (
 			<DashboardMenu menu="industry" subMenu="viewIndustry">
+				<Head>
+					<title>List Industri</title>
+				</Head>
+				<Title>List Industri</Title>
+				<Paragraph>Berikut daftar industri yang kamu kelola</Paragraph>
 				{dLoading && <p>menghapus industri...</p>}
 				{dError && <p>gagal menghapus: {dError.message}</p>}
 				<List
@@ -57,9 +60,7 @@ const Company = () => {
 										}
 									/>
 								}
-								title={
-									<a href="https://ant.design">{item.name}</a>
-								}
+								title={<a href="#">{item.name}</a>}
 								description={item.description}
 							/>
 							<NextLink

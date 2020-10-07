@@ -12,6 +12,7 @@ type formValues = {
 	contact: string;
 	category: number;
 	description: string;
+	imageUrl?: string | "/company/default.png";
 };
 
 type companyFormType = {

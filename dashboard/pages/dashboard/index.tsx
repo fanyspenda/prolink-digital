@@ -7,6 +7,7 @@ import { useGetUserInfoQuery } from "graphqlSchema/types";
 import { userContext } from "context/userContext";
 import { hasuraHeader } from "environtment";
 import { LoadingErrorHandler } from "components/loadingErrorHandler";
+import { Image } from "cloudinary-react";
 
 const { Title } = Typography;
 
