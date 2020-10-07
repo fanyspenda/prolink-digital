@@ -1,18 +1,17 @@
 import { DashboardMenu } from "components/dashboardMenu";
-import { Typography, Form, Input, Select, Button } from "antd";
 import {
 	useGetCategoriesQuery,
 	useInsertCompanyMutation,
+	useGetCategoriesLazyQuery,
 } from "graphqlSchema/types";
 import { hasuraHeader } from "environtment";
 import { useContext } from "react";
-import { userContext } from "context/userContext";
+import { useUser } from "hooks/useUser";
 import { v4 as uuidv4 } from "uuid";
 import { CompanyForm } from "components/companyForm";
-
-const { Title, Paragraph } = Typography;
-const { TextArea } = Input;
-const { Option } = Select;
+import { withAuthenticationRequired } from "@auth0/auth0-react";
+import { LoadingErrorHandler } from "components/loadingErrorHandler";
+import { userContext } from "context/userContext";
 
 type formValues = {
 	name: string;
@@ -23,10 +22,13 @@ type formValues = {
 };
 
 const CreateCompany = () => {
-	const userData = useContext(userContext);
+	const {
+		user: { id, role },
+	} = useContext(userContext);
 	const { data, loading, error } = useGetCategoriesQuery({
-		context: hasuraHeader(userData.user.id, userData.user.role),
+		context: hasuraHeader(id, role),
 	});
+
 	const [
 		insertCompany,
 		{ loading: mLoading, data: mData, error: mError },
@@ -35,7 +37,7 @@ const CreateCompany = () => {
 		insertCompany({
 			variables: {
 				id: uuidv4(),
-				userId: userData.user.id,
+				userId: id,
 				name: values.name,
 				description: values.description,
 				address: values.address,
@@ -45,30 +47,17 @@ const CreateCompany = () => {
 		});
 	};
 
-	if (loading)
-		return (
-			<DashboardMenu menu="industry" subMenu="addIndustry">
-				<p>loading</p>
-			</DashboardMenu>
-		);
-	else if (error)
-		return (
-			<DashboardMenu menu="industry" subMenu="addIndustry">
-				<p>{error.message}</p>
-			</DashboardMenu>
-		);
-	else
-		return (
-			<DashboardMenu menu="industry" subMenu="addIndustry">
-				<CompanyForm
-					isEdit={false}
-					categoryData={data}
-					submitError={mError}
-					submitLoading={mLoading}
-					handleSubmit={handleSubmit}
-				/>
-			</DashboardMenu>
-		);
+	return (
+		<>
+			<CompanyForm
+				isEdit={false}
+				categoryData={data}
+				submitError={mError}
+				submitLoading={mLoading}
+				handleSubmit={handleSubmit}
+			/>
+		</>
+	);
 };
 
-export default CreateCompany;
+export default withAuthenticationRequired(CreateCompany);

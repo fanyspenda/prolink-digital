@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 const { Header, Sider, Content } = Layout;
 const { SubMenu } = Menu;
 
-type activeMenu = {
+export type activeMenu = {
 	menu?: "industry" | "profile";
 	subMenu?: "addIndustry" | "viewIndustry" | "updateProfile";
 };

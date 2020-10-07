@@ -2,37 +2,27 @@ import Head from "next/head";
 import { withAuthenticationRequired, useAuth0 } from "@auth0/auth0-react";
 import { DashboardMenu } from "components/dashboardMenu";
 import { Layout, Typography } from "antd";
-import { useGetUserInfoQuery } from "graphqlSchema/types";
-import { hasuraHeader } from "environtment";
-import { userContext } from "context/userContext";
 import { useContext } from "react";
+import { useGetUserInfoQuery } from "graphqlSchema/types";
+import { userContext } from "context/userContext";
+import { hasuraHeader } from "environtment";
+import { LoadingErrorHandler } from "components/loadingErrorHandler";
 
 const { Title } = Typography;
 
 const Dashboard = () => {
-	const { user } = useAuth0();
 	const contextUser = useContext(userContext);
-
+	const { user: auth0User } = useAuth0();
 	const { loading, data, error } = useGetUserInfoQuery({
 		fetchPolicy: "network-only",
-		context: hasuraHeader(user.sub, "user"),
+		context: hasuraHeader(auth0User.sub, "user"),
 		onCompleted: ({ user }) => {
 			contextUser.setter({ id: user[0].id, role: user[0].role });
 		},
 	});
 
-	if (error)
-		return (
-			<DashboardMenu>
-				<p>{error.message}</p>
-			</DashboardMenu>
-		);
-	else if (loading)
-		return (
-			<DashboardMenu>
-				<p>loading...</p>
-			</DashboardMenu>
-		);
+	if (loading || error)
+		return <LoadingErrorHandler loading={loading} error={error} />;
 	else
 		return (
 			<DashboardMenu>
