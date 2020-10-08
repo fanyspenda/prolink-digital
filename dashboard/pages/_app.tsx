@@ -9,7 +9,6 @@ import {
 } from "environtment";
 import { userContext } from "context/userContext";
 import { useState } from "react";
-import { CloudinaryContext } from "cloudinary-react";
 
 const graphqlClient = new ApolloClient({
 	uri: HASURA_GRAPHQL,
@@ -35,9 +34,7 @@ const MyApp = ({ Component, pageProps }) => {
 		>
 			<ApolloProvider client={graphqlClient}>
 				<userContext.Provider value={{ user, setter: setUser }}>
-					<CloudinaryContext cloudName="dceo8gpwh">
-						<Component {...pageProps} />
-					</CloudinaryContext>
+					<Component {...pageProps} />
 				</userContext.Provider>
 			</ApolloProvider>
 		</Auth0Provider>

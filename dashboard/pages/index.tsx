@@ -1,4 +1,3 @@
-import Head from "next/head";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
