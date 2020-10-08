@@ -6,6 +6,7 @@ mutation insertCompany(
 	$address: String!
 	$contact: String!
 	$userId: String!
+	$logoUrl: String
 ) {
 	insert_company(
 		objects: {
@@ -16,6 +17,7 @@ mutation insertCompany(
 			address: $address
 			contact: $contact
 			user_id: $userId
+			logo_url: $logoUrl
 		}
 	) {
 		affected_rows

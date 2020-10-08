@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { withAuthenticationRequired, useAuth0 } from "@auth0/auth0-react";
 import { DashboardMenu } from "components/dashboardMenu";
-import { Layout, Typography, Button, Input, Upload } from "antd";
+import { Layout, Typography, Button, Upload, notification } from "antd";
 import { useContext, useState, useEffect } from "react";
 import { useGetUserInfoQuery } from "graphqlSchema/types";
 import { userContext } from "context/userContext";
@@ -34,8 +34,20 @@ const Dashboard = () => {
 			.post(CLOUDINARY_UPLOAD_URL, formData)
 			.then((res) => {
 				console.log(res.data);
+				notification.open({
+					message: "Sukses",
+					description: "sukses menambah gambar",
+					duration: 4000,
+				});
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => {
+				notification.open({
+					message: "Gagal",
+					description: "gagal menambah gambar",
+					duration: 4000,
+					style: { backgroundColor: "#fcc1b8" },
+				});
+			});
 	};
 
 	const handleChooseImage = (imgFile: RcFile) => {

@@ -1582,6 +1582,7 @@ export type InsertCompanyMutationVariables = Exact<{
   address: Scalars['String'];
   contact: Scalars['String'];
   userId: Scalars['String'];
+  logoUrl?: Maybe<Scalars['String']>;
 }>;
 
 
@@ -1719,8 +1720,8 @@ export type DeleteCompanyByPkMutationHookResult = ReturnType<typeof useDeleteCom
 export type DeleteCompanyByPkMutationResult = Apollo.MutationResult<DeleteCompanyByPkMutation>;
 export type DeleteCompanyByPkMutationOptions = Apollo.BaseMutationOptions<DeleteCompanyByPkMutation, DeleteCompanyByPkMutationVariables>;
 export const InsertCompanyDocument = gql`
-    mutation insertCompany($id: String!, $name: String!, $description: String!, $categoryId: Int!, $address: String!, $contact: String!, $userId: String!) {
-  insert_company(objects: {id: $id, name: $name, description: $description, category_id: $categoryId, address: $address, contact: $contact, user_id: $userId}) {
+    mutation insertCompany($id: String!, $name: String!, $description: String!, $categoryId: Int!, $address: String!, $contact: String!, $userId: String!, $logoUrl: String) {
+  insert_company(objects: {id: $id, name: $name, description: $description, category_id: $categoryId, address: $address, contact: $contact, user_id: $userId, logo_url: $logoUrl}) {
     affected_rows
   }
 }
@@ -1747,6 +1748,7 @@ export type InsertCompanyMutationFn = Apollo.MutationFunction<InsertCompanyMutat
  *      address: // value for 'address'
  *      contact: // value for 'contact'
  *      userId: // value for 'userId'
+ *      logoUrl: // value for 'logoUrl'
  *   },
  * });
  */

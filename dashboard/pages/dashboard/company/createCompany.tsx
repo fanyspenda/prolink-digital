@@ -3,14 +3,16 @@ import {
 	useGetCategoriesQuery,
 	useInsertCompanyMutation,
 } from "graphqlSchema/types";
-import { hasuraHeader } from "environtment";
+import { hasuraHeader, CLOUDINARY_UPLOAD_URL } from "environtment";
 import { useContext } from "react";
-import { v4 as uuidv4 } from "uuid";
 import { CompanyForm } from "components/companyForm";
 import { withAuthenticationRequired } from "@auth0/auth0-react";
 import { LoadingErrorHandler } from "components/loadingErrorHandler";
 import { userContext } from "context/userContext";
 import Head from "next/head";
+import { RcFile } from "antd/lib/upload";
+import axios from "axios";
+import { notification } from "antd";
 
 type formValues = {
 	name: string;
@@ -28,24 +30,6 @@ const CreateCompany = () => {
 		context: hasuraHeader(id, role),
 	});
 
-	const [
-		insertCompany,
-		{ loading: mLoading, data: mData, error: mError },
-	] = useInsertCompanyMutation();
-	const handleSubmit = (values: formValues) => {
-		insertCompany({
-			variables: {
-				id: uuidv4(),
-				userId: id,
-				name: values.name,
-				description: values.description,
-				address: values.address,
-				contact: values.contact,
-				categoryId: values.category,
-			},
-		});
-	};
-
 	if (error || loading)
 		return (
 			<LoadingErrorHandler
@@ -60,13 +44,7 @@ const CreateCompany = () => {
 				<Head>
 					<title>Tambah Industri</title>
 				</Head>
-				<CompanyForm
-					isEdit={false}
-					categoryData={data}
-					submitError={mError}
-					submitLoading={mLoading}
-					handleSubmit={handleSubmit}
-				/>
+				<CompanyForm isEdit={false} categoryData={data} userId={id} />
 			</DashboardMenu>
 		);
 };
