@@ -8,6 +8,8 @@ query getEditCompanyData($companyId: String!) {
 		}
 		address
 		contact
+		logo_id
+		logo_url
 	}
 
 	category {

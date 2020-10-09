@@ -6,6 +6,7 @@ query getCompanies {
 		address
 		contact
 		logo_url
+		logo_id
 		category {
 			name
 		}

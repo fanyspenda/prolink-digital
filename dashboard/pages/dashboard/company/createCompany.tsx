@@ -1,26 +1,12 @@
 import { DashboardMenu } from "components/dashboardMenu";
-import {
-	useGetCategoriesQuery,
-	useInsertCompanyMutation,
-} from "graphqlSchema/types";
-import { hasuraHeader, CLOUDINARY_UPLOAD_URL } from "environtment";
+import { useGetCategoriesQuery } from "graphqlSchema/types";
+import { hasuraHeader } from "environtment";
 import { useContext } from "react";
 import { CompanyForm } from "components/companyForm";
 import { withAuthenticationRequired } from "@auth0/auth0-react";
 import { LoadingErrorHandler } from "components/loadingErrorHandler";
 import { userContext } from "context/userContext";
 import Head from "next/head";
-import { RcFile } from "antd/lib/upload";
-import axios from "axios";
-import { notification } from "antd";
-
-type formValues = {
-	name: string;
-	address: string;
-	contact: string;
-	category: number;
-	description: string;
-};
 
 const CreateCompany = () => {
 	const {

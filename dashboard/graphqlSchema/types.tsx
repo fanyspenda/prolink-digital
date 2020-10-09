@@ -346,6 +346,7 @@ export type Company = {
   contact: Scalars['String'];
   description?: Maybe<Scalars['String']>;
   id: Scalars['String'];
+  logo_id?: Maybe<Scalars['String']>;
   logo_url?: Maybe<Scalars['String']>;
   name: Scalars['String'];
   /** An object relationship */
@@ -426,6 +427,7 @@ export type Company_Bool_Exp = {
   contact?: Maybe<String_Comparison_Exp>;
   description?: Maybe<String_Comparison_Exp>;
   id?: Maybe<String_Comparison_Exp>;
+  logo_id?: Maybe<String_Comparison_Exp>;
   logo_url?: Maybe<String_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
   user?: Maybe<User_Bool_Exp>;
@@ -451,6 +453,7 @@ export type Company_Insert_Input = {
   contact?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
+  logo_id?: Maybe<Scalars['String']>;
   logo_url?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   user?: Maybe<User_Obj_Rel_Insert_Input>;
@@ -465,6 +468,7 @@ export type Company_Max_Fields = {
   contact?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
+  logo_id?: Maybe<Scalars['String']>;
   logo_url?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   user_id?: Maybe<Scalars['String']>;
@@ -477,6 +481,7 @@ export type Company_Max_Order_By = {
   contact?: Maybe<Order_By>;
   description?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
+  logo_id?: Maybe<Order_By>;
   logo_url?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
   user_id?: Maybe<Order_By>;
@@ -490,6 +495,7 @@ export type Company_Min_Fields = {
   contact?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
+  logo_id?: Maybe<Scalars['String']>;
   logo_url?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   user_id?: Maybe<Scalars['String']>;
@@ -502,6 +508,7 @@ export type Company_Min_Order_By = {
   contact?: Maybe<Order_By>;
   description?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
+  logo_id?: Maybe<Order_By>;
   logo_url?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
   user_id?: Maybe<Order_By>;
@@ -537,6 +544,7 @@ export type Company_Order_By = {
   contact?: Maybe<Order_By>;
   description?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
+  logo_id?: Maybe<Order_By>;
   logo_url?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
   user?: Maybe<User_Order_By>;
@@ -561,6 +569,8 @@ export enum Company_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
+  LogoId = 'logo_id',
+  /** column name */
   LogoUrl = 'logo_url',
   /** column name */
   Name = 'name',
@@ -575,6 +585,7 @@ export type Company_Set_Input = {
   contact?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
+  logo_id?: Maybe<Scalars['String']>;
   logo_url?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   user_id?: Maybe<Scalars['String']>;
@@ -636,6 +647,8 @@ export enum Company_Update_Column {
   Description = 'description',
   /** column name */
   Id = 'id',
+  /** column name */
+  LogoId = 'logo_id',
   /** column name */
   LogoUrl = 'logo_url',
   /** column name */
@@ -1583,6 +1596,7 @@ export type InsertCompanyMutationVariables = Exact<{
   contact: Scalars['String'];
   userId: Scalars['String'];
   logoUrl?: Maybe<Scalars['String']>;
+  logoId?: Maybe<Scalars['String']>;
 }>;
 
 
@@ -1601,6 +1615,8 @@ export type UpdateCompanyByPkMutationVariables = Exact<{
   address: Scalars['String'];
   category_id: Scalars['Int'];
   contact: Scalars['String'];
+  logoUrl?: Maybe<Scalars['String']>;
+  logoId?: Maybe<Scalars['String']>;
 }>;
 
 
@@ -1630,7 +1646,7 @@ export type GetCompaniesQuery = (
   { __typename?: 'query_root' }
   & { company: Array<(
     { __typename?: 'company' }
-    & Pick<Company, 'id' | 'name' | 'description' | 'address' | 'contact' | 'logo_url'>
+    & Pick<Company, 'id' | 'name' | 'description' | 'address' | 'contact' | 'logo_url' | 'logo_id'>
     & { category: (
       { __typename?: 'category' }
       & Pick<Category, 'name'>
@@ -1647,7 +1663,7 @@ export type GetCompanyByPkQuery = (
   { __typename?: 'query_root' }
   & { company_by_pk?: Maybe<(
     { __typename?: 'company' }
-    & Pick<Company, 'name' | 'description' | 'address' | 'contact'>
+    & Pick<Company, 'name' | 'description' | 'address' | 'contact' | 'logo_url' | 'logo_id'>
     & { category: (
       { __typename?: 'category' }
       & Pick<Category, 'id' | 'name'>
@@ -1664,7 +1680,7 @@ export type GetEditCompanyDataQuery = (
   { __typename?: 'query_root' }
   & { company_by_pk?: Maybe<(
     { __typename?: 'company' }
-    & Pick<Company, 'name' | 'description' | 'address' | 'contact'>
+    & Pick<Company, 'name' | 'description' | 'address' | 'contact' | 'logo_id' | 'logo_url'>
     & { category: (
       { __typename?: 'category' }
       & Pick<Category, 'id' | 'name'>
@@ -1720,8 +1736,8 @@ export type DeleteCompanyByPkMutationHookResult = ReturnType<typeof useDeleteCom
 export type DeleteCompanyByPkMutationResult = Apollo.MutationResult<DeleteCompanyByPkMutation>;
 export type DeleteCompanyByPkMutationOptions = Apollo.BaseMutationOptions<DeleteCompanyByPkMutation, DeleteCompanyByPkMutationVariables>;
 export const InsertCompanyDocument = gql`
-    mutation insertCompany($id: String!, $name: String!, $description: String!, $categoryId: Int!, $address: String!, $contact: String!, $userId: String!, $logoUrl: String) {
-  insert_company(objects: {id: $id, name: $name, description: $description, category_id: $categoryId, address: $address, contact: $contact, user_id: $userId, logo_url: $logoUrl}) {
+    mutation insertCompany($id: String!, $name: String!, $description: String!, $categoryId: Int!, $address: String!, $contact: String!, $userId: String!, $logoUrl: String, $logoId: String) {
+  insert_company(objects: {id: $id, name: $name, description: $description, category_id: $categoryId, address: $address, contact: $contact, user_id: $userId, logo_url: $logoUrl, logo_id: $logoId}) {
     affected_rows
   }
 }
@@ -1749,6 +1765,7 @@ export type InsertCompanyMutationFn = Apollo.MutationFunction<InsertCompanyMutat
  *      contact: // value for 'contact'
  *      userId: // value for 'userId'
  *      logoUrl: // value for 'logoUrl'
+ *      logoId: // value for 'logoId'
  *   },
  * });
  */
@@ -1759,8 +1776,8 @@ export type InsertCompanyMutationHookResult = ReturnType<typeof useInsertCompany
 export type InsertCompanyMutationResult = Apollo.MutationResult<InsertCompanyMutation>;
 export type InsertCompanyMutationOptions = Apollo.BaseMutationOptions<InsertCompanyMutation, InsertCompanyMutationVariables>;
 export const UpdateCompanyByPkDocument = gql`
-    mutation updateCompanyByPK($id: String!, $name: String!, $description: String!, $address: String!, $category_id: Int!, $contact: String!) {
-  update_company_by_pk(pk_columns: {id: $id}, _set: {name: $name, description: $description, address: $address, category_id: $category_id, contact: $contact}) {
+    mutation updateCompanyByPK($id: String!, $name: String!, $description: String!, $address: String!, $category_id: Int!, $contact: String!, $logoUrl: String, $logoId: String) {
+  update_company_by_pk(pk_columns: {id: $id}, _set: {name: $name, description: $description, address: $address, category_id: $category_id, contact: $contact, logo_url: $logoUrl, logo_id: $logoId}) {
     id
   }
 }
@@ -1786,6 +1803,8 @@ export type UpdateCompanyByPkMutationFn = Apollo.MutationFunction<UpdateCompanyB
  *      address: // value for 'address'
  *      category_id: // value for 'category_id'
  *      contact: // value for 'contact'
+ *      logoUrl: // value for 'logoUrl'
+ *      logoId: // value for 'logoId'
  *   },
  * });
  */
@@ -1837,6 +1856,7 @@ export const GetCompaniesDocument = gql`
     address
     contact
     logo_url
+    logo_id
     category {
       name
     }
@@ -1879,6 +1899,8 @@ export const GetCompanyByPkDocument = gql`
     }
     address
     contact
+    logo_url
+    logo_id
   }
 }
     `;
@@ -1919,6 +1941,8 @@ export const GetEditCompanyDataDocument = gql`
     }
     address
     contact
+    logo_id
+    logo_url
   }
   category {
     id

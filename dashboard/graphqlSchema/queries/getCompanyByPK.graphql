@@ -8,5 +8,7 @@ query getCompanyByPK($id: String!) {
 		}
 		address
 		contact
+		logo_url
+		logo_id
 	}
 }

@@ -14,7 +14,6 @@ import { CLOUDINARY_UPLOAD_URL } from "environtment";
 const { Title } = Typography;
 
 const Dashboard = () => {
-	const [img, setImg] = useState<RcFile[]>([]);
 	const contextUser = useContext(userContext);
 	const { user: auth0User } = useAuth0();
 	const { loading, data, error } = useGetUserInfoQuery({
@@ -24,40 +23,6 @@ const Dashboard = () => {
 			contextUser.setter({ id: user[0].id, role: user[0].role });
 		},
 	});
-
-	const handleClickUpload = (imgFile: RcFile) => {
-		console.log(imgFile);
-		const formData = new FormData();
-		formData.append("file", imgFile);
-		formData.append("upload_preset", "e9bhwoo5");
-		axios
-			.post(CLOUDINARY_UPLOAD_URL, formData)
-			.then((res) => {
-				console.log(res.data);
-				notification.open({
-					message: "Sukses",
-					description: "sukses menambah gambar",
-					duration: 4000,
-				});
-			})
-			.catch((err) => {
-				notification.open({
-					message: "Gagal",
-					description: "gagal menambah gambar",
-					duration: 4000,
-					style: { backgroundColor: "#fcc1b8" },
-				});
-			});
-	};
-
-	const handleChooseImage = (imgFile: RcFile) => {
-		setImg([imgFile]);
-		return false;
-	};
-
-	useEffect(() => {
-		console.log(img);
-	}, [img]);
 
 	if (loading || error)
 		return <LoadingErrorHandler loading={loading} error={error} />;
@@ -71,19 +36,6 @@ const Dashboard = () => {
 					<Title>
 						Selamat Datang di Halaman Dashboard, {data.user[0].name}
 					</Title>
-					<Upload
-						name="logo"
-						fileList={img}
-						beforeUpload={(file) => handleChooseImage(file)}
-					>
-						<Button>Click to upload</Button>
-					</Upload>
-					<Button
-						onClick={() => handleClickUpload(img[0])}
-						disabled={img && false}
-					>
-						Upload Image
-					</Button>
 				</Layout>
 			</DashboardMenu>
 		);

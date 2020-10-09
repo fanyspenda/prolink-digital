@@ -17,6 +17,7 @@ import { RcFile } from "antd/lib/upload";
 import { CLOUDINARY_UPLOAD_URL } from "environtment";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
+import { useRouter } from "next/router";
 
 const { Title, Paragraph } = Typography;
 const { Option } = Select;
@@ -36,6 +37,7 @@ type companyFormType = {
 	categoryData: GetCategoriesQuery;
 	editData?: formValues;
 	userId: string;
+	companyId?: string;
 };
 
 export const CompanyForm: React.FunctionComponent<companyFormType> = ({
@@ -43,12 +45,21 @@ export const CompanyForm: React.FunctionComponent<companyFormType> = ({
 	categoryData,
 	editData,
 	userId,
+	companyId,
 }) => {
-	const [img, setImg] = useState<RcFile[]>();
+	const router = useRouter();
+	const [img, setImg] = useState<RcFile[]>([]);
 	const [
 		insertCompany,
 		{ loading: addLoading, error: addError },
 	] = useInsertCompanyMutation();
+
+	const [
+		updateCompany,
+		{ loading: updateLoading, error: updateError },
+	] = useUpdateCompanyByPkMutation({
+		onCompleted: () => router.push("/dashboard/company"),
+	});
 
 	const handleImageUpload = (imgFile: RcFile) => {
 		console.log(imgFile);
@@ -62,31 +73,45 @@ export const CompanyForm: React.FunctionComponent<companyFormType> = ({
 		handleImageUpload(img[0])
 			.then((res) => {
 				console.log(res.data);
-				insertCompany({
-					variables: {
-						id: uuidv4(),
-						userId: userId,
-						name: values.name,
-						description: values.description,
-						address: values.address,
-						contact: values.contact,
-						categoryId: values.category,
-						logoUrl: res.data.url,
-					},
-				});
+				if (!isEdit)
+					insertCompany({
+						variables: {
+							id: uuidv4(),
+							userId: userId,
+							name: values.name,
+							description: values.description,
+							address: values.address,
+							contact: values.contact,
+							categoryId: values.category,
+							logoUrl: res.data.url,
+							logoId: res.data.public_id,
+						},
+					});
+				else if (isEdit)
+					updateCompany({
+						variables: {
+							id: companyId,
+							name: values.name,
+							description: values.description,
+							address: values.address,
+							contact: values.contact,
+							category_id: values.category,
+							logoUrl: res.data.url,
+							logoId: res.data.public_id,
+						},
+					});
 			})
 			.then(() => {
 				notification.open({
 					message: "Sukses",
-					description: "sukses menambah gambar",
-					duration: 4000,
+					description: "sukses menambah Industri",
+					style: { backgroundColor: "#adffc8" },
 				});
 			})
 			.catch((err) => {
 				notification.open({
 					message: "Gagal",
-					description: "gagal menambah gambar",
-					duration: 4000,
+					description: `Terjadi kesalahan: ${err}`,
 					style: { backgroundColor: "#fcc1b8" },
 				});
 			});
@@ -114,6 +139,7 @@ export const CompanyForm: React.FunctionComponent<companyFormType> = ({
 					<p>memperbarui data...</p>
 				))}
 			{addError && <p>terjadi kesalahan: {addError.message}</p>}
+			{updateError && <p>terjadi kesalahan: {updateError.message}</p>}
 			<Form labelCol={{ span: 2 }} onFinish={handleSubmit}>
 				<Form.Item
 					label="Nama Industri"
@@ -165,7 +191,9 @@ export const CompanyForm: React.FunctionComponent<companyFormType> = ({
 					<Upload
 						name="logo"
 						fileList={img}
+						listType="picture-card"
 						beforeUpload={(file) => handleChooseImage(file)}
+						onRemove={() => setImg([])}
 					>
 						<Button>Click to upload</Button>
 					</Upload>
@@ -174,7 +202,7 @@ export const CompanyForm: React.FunctionComponent<companyFormType> = ({
 					<Button
 						type="primary"
 						htmlType="submit"
-						loading={addLoading}
+						loading={addLoading || updateLoading}
 					>
 						{!isEdit ? "Tambah Data" : "Perbarui Data"}
 					</Button>

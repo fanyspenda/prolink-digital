@@ -5,6 +5,8 @@ mutation updateCompanyByPK(
 	$address: String!
 	$category_id: Int!
 	$contact: String!
+	$logoUrl: String
+	$logoId: String
 ) {
 	update_company_by_pk(
 		pk_columns: { id: $id }
@@ -14,6 +16,8 @@ mutation updateCompanyByPK(
 			address: $address
 			category_id: $category_id
 			contact: $contact
+			logo_url: $logoUrl
+			logo_id: $logoId
 		}
 	) {
 		id

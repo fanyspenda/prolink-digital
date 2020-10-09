@@ -9,6 +9,7 @@ import { useContext } from "react";
 import { userContext } from "context/userContext";
 import { CompanyForm } from "components/companyForm";
 import { useRouter } from "next/router";
+import { LoadingErrorHandler } from "components/loadingErrorHandler";
 
 type formValues = {
 	name: string;
@@ -27,45 +28,24 @@ export const getServerSideProps = async ({ params }) => {
 };
 
 const EditCompany = ({ companyId }) => {
-	const router = useRouter();
-	const userData = useContext(userContext);
+	const {
+		user: { id, role },
+	} = useContext(userContext);
 	const { data, loading, error } = useGetEditCompanyDataQuery({
-		context: hasuraHeader(userData.user.id, userData.user.role),
+		context: hasuraHeader(id, role),
 		variables: {
 			companyId,
 		},
 		fetchPolicy: "network-only",
 	});
-	const [
-		updateCompany,
-		{ loading: mLoading, error: mError },
-	] = useUpdateCompanyByPkMutation({
-		onCompleted: () => router.push("/dashboard/company"),
-	});
-	const handleSubmit = (values: formValues) => {
-		updateCompany({
-			variables: {
-				id: companyId,
-				name: values.name,
-				description: values.description,
-				address: values.address,
-				contact: values.contact,
-				category_id: values.category,
-			},
-		});
-	};
 
-	if (loading)
+	if (loading || error)
 		return (
-			<DashboardMenu menu="industry" subMenu="viewIndustry">
-				<p>loading</p>
-			</DashboardMenu>
-		);
-	else if (error)
-		return (
-			<DashboardMenu menu="industry" subMenu="viewIndustry">
-				<p>{error.message}</p>
-			</DashboardMenu>
+			<LoadingErrorHandler
+				loading={loading}
+				error={error}
+				dashboardMenu={{ menu: "industry", subMenu: "viewIndustry" }}
+			/>
 		);
 	else
 		return (
@@ -73,16 +53,16 @@ const EditCompany = ({ companyId }) => {
 				<CompanyForm
 					isEdit={true}
 					categoryData={data}
-					submitError={mError}
-					submitLoading={mLoading}
-					handleSubmit={handleSubmit}
+					userId={id}
 					editData={{
 						address: data.company_by_pk.address,
 						contact: data.company_by_pk.contact,
 						name: data.company_by_pk.name,
 						description: data.company_by_pk.description,
 						category: data.company_by_pk.category.id,
+						imageUrl: data.company_by_pk.logo_url,
 					}}
+					companyId={companyId}
 				/>
 			</DashboardMenu>
 		);

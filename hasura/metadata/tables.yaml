@@ -32,14 +32,15 @@
     permission:
       check: {}
       columns:
-      - address
-      - category_id
-      - contact
-      - description
       - id
-      - logo_url
       - name
+      - contact
+      - address
+      - description
+      - category_id
+      - logo_url
       - user_id
+      - logo_id
       backend_only: false
   select_permissions:
   - role: user
@@ -63,6 +64,7 @@
       - category_id
       - contact
       - description
+      - logo_id
       - logo_url
       - name
       filter:
