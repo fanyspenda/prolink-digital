@@ -145,6 +145,13 @@ export const CompanyForm: React.FunctionComponent<companyFormType> = ({
 					label="Nama Industri"
 					name="name"
 					initialValue={editData?.name}
+					rules={[
+						{
+							required: true,
+							message: "Nama Industri harus diisi!",
+						},
+					]}
+					hasFeedback
 				>
 					<Input autoFocus />
 				</Form.Item>
@@ -152,6 +159,13 @@ export const CompanyForm: React.FunctionComponent<companyFormType> = ({
 					label="Deskripsi"
 					name="description"
 					initialValue={editData?.description}
+					rules={[
+						{
+							required: true,
+							message: "Deskripsi harus diisi!",
+						},
+					]}
+					hasFeedback
 				>
 					<TextArea rows={3} />
 				</Form.Item>
@@ -159,6 +173,13 @@ export const CompanyForm: React.FunctionComponent<companyFormType> = ({
 					label="Kategori"
 					name="category"
 					initialValue={editData?.category}
+					rules={[
+						{
+							required: true,
+							message: "Kategori harus diisi!",
+						},
+					]}
+					hasFeedback
 				>
 					<Select
 						allowClear
@@ -173,6 +194,13 @@ export const CompanyForm: React.FunctionComponent<companyFormType> = ({
 					label="Alamat"
 					name="address"
 					initialValue={editData?.address}
+					rules={[
+						{
+							required: true,
+							message: "Alamat harus diisi!",
+						},
+					]}
+					hasFeedback
 				>
 					<Input />
 				</Form.Item>
@@ -180,13 +208,21 @@ export const CompanyForm: React.FunctionComponent<companyFormType> = ({
 					label="Kontak"
 					name="contact"
 					initialValue={editData?.contact}
+					rules={[
+						{
+							required: true,
+							message: "Nama Industri harus diisi!",
+						},
+					]}
+					hasFeedback
 				>
-					<Input />
+					<Input onChange={(e) => parseInt(e.target.value)} />
 				</Form.Item>
 				<Form.Item
 					label="Logo"
 					name="image"
 					initialValue={editData?.imageUrl}
+					hasFeedback
 				>
 					<Upload
 						name="logo"
