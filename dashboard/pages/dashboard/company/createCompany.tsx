@@ -21,12 +21,20 @@ const CreateCompany = () => {
 			<LoadingErrorHandler
 				loading={loading}
 				error={error}
-				dashboardMenu={{ menu: "industry", subMenu: "addIndustry" }}
+				dashboardMenu={{
+					menu: "industry",
+					subMenu: "addIndustry",
+					userRole: role,
+				}}
 			/>
 		);
 	else
 		return (
-			<DashboardMenu menu="industry" subMenu="addIndustry">
+			<DashboardMenu
+				menu="industry"
+				subMenu="addIndustry"
+				userRole={role}
+			>
 				<Head>
 					<title>Tambah Industri</title>
 				</Head>

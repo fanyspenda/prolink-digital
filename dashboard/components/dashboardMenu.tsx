@@ -6,14 +6,16 @@ const { Header, Sider, Content } = Layout;
 const { SubMenu } = Menu;
 
 export type activeMenu = {
-	menu?: "industry" | "profile";
-	subMenu?: "addIndustry" | "viewIndustry" | "updateProfile";
+	menu?: "industry" | "profile" | "users";
+	subMenu?: "addIndustry" | "viewIndustry" | "viewUser";
+	userRole: string;
 };
 
 export const DashboardMenu: React.FunctionComponent<activeMenu> = ({
 	children,
 	subMenu,
 	menu,
+	userRole,
 }) => {
 	const router = useRouter();
 	const { logout } = useAuth0();
@@ -60,18 +62,18 @@ export const DashboardMenu: React.FunctionComponent<activeMenu> = ({
 								Lihat Industri
 							</Menu.Item>
 						</SubMenu>
-						<SubMenu key="profile" title="Profil">
-							<Menu.Item
-								key="updateProfile"
-								onClick={() =>
-									router.push(
-										"/dashboard/profile/updateProfile"
-									)
-								}
-							>
-								Ubah Data Pribadi
-							</Menu.Item>
-						</SubMenu>
+						{userRole == "admin" && (
+							<SubMenu key="users" title="Pengguna">
+								<Menu.Item
+									key="viewUser"
+									onClick={() =>
+										router.push("/dashboard/user")
+									}
+								>
+									Ubah Data Pribadi
+								</Menu.Item>
+							</SubMenu>
+						)}
 					</Menu>
 				</Sider>
 

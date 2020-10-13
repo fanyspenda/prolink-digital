@@ -28,7 +28,7 @@ const Dashboard = () => {
 		return <LoadingErrorHandler loading={loading} error={error} />;
 	else
 		return (
-			<DashboardMenu>
+			<DashboardMenu userRole={data.user[0].role}>
 				<Head>
 					<title>Dashboard</title>
 				</Head>

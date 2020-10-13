@@ -1,6 +1,7 @@
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 import { Auth0Provider } from "@auth0/auth0-react";
 import "styles/antd.css";
+import "styles/tailwind.css";
 import {
 	AUTH0_CLIENT_ID,
 	AUTH0_DOMAIN,

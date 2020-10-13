@@ -205,7 +205,7 @@ export const CompanyForm: React.FunctionComponent<companyFormType> = ({
 					<Input />
 				</Form.Item>
 				<Form.Item
-					label="Kontak"
+					label="No. Telpon"
 					name="contact"
 					initialValue={editData?.contact}
 					rules={[
@@ -216,7 +216,7 @@ export const CompanyForm: React.FunctionComponent<companyFormType> = ({
 					]}
 					hasFeedback
 				>
-					<Input onChange={(e) => parseInt(e.target.value)} />
+					<Input />
 				</Form.Item>
 				<Form.Item
 					label="Logo"

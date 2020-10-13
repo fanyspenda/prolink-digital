@@ -44,12 +44,20 @@ const EditCompany = ({ companyId }) => {
 			<LoadingErrorHandler
 				loading={loading}
 				error={error}
-				dashboardMenu={{ menu: "industry", subMenu: "viewIndustry" }}
+				dashboardMenu={{
+					menu: "industry",
+					subMenu: "viewIndustry",
+					userRole: role,
+				}}
 			/>
 		);
 	else
 		return (
-			<DashboardMenu menu="industry" subMenu="viewIndustry">
+			<DashboardMenu
+				menu="industry"
+				subMenu="viewIndustry"
+				userRole={role}
+			>
 				<CompanyForm
 					isEdit={true}
 					categoryData={data}

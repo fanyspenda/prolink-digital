@@ -16,16 +16,18 @@ const { Title, Paragraph } = Typography;
 
 const Company = () => {
 	const router = useRouter();
-	const userData = useContext(userContext);
+	const {
+		user: { id, role },
+	} = useContext(userContext);
 	const { data, loading, error, refetch } = useGetCompaniesQuery({
 		fetchPolicy: "network-only",
-		context: hasuraHeader(userData.user.id, userData.user.role),
+		context: hasuraHeader(id, role),
 	});
 	const [
 		deleteCompany,
 		{ loading: dLoading, error: dError },
 	] = useDeleteCompanyByPkMutation({
-		context: hasuraHeader(userData.user.id, userData.user.role),
+		context: hasuraHeader(id, role),
 		onCompleted: () => refetch(),
 	});
 
@@ -34,12 +36,20 @@ const Company = () => {
 			<LoadingErrorHandler
 				error={error}
 				loading={loading}
-				dashboardMenu={{ menu: "industry", subMenu: "viewIndustry" }}
+				dashboardMenu={{
+					menu: "industry",
+					subMenu: "viewIndustry",
+					userRole: role,
+				}}
 			/>
 		);
 	else
 		return (
-			<DashboardMenu menu="industry" subMenu="viewIndustry">
+			<DashboardMenu
+				menu="industry"
+				subMenu="viewIndustry"
+				userRole={role}
+			>
 				<Head>
 					<title>List Industri</title>
 				</Head>

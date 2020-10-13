@@ -51,6 +51,7 @@
       - contact
       - description
       - id
+      - logo_id
       - logo_url
       - name
       filter:
