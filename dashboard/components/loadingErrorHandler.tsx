@@ -16,6 +16,7 @@ export const LoadingErrorHandler: React.FunctionComponent<loadingErrorType> = ({
 		<DashboardMenu
 			menu={dashboardMenu?.menu}
 			subMenu={dashboardMenu?.subMenu}
+			userRole="user"
 		>
 			{loading && <p>loading...</p>}
 			{error && <p>{error.message}</p>}
