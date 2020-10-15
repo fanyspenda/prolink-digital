@@ -30,7 +30,7 @@ export const DashboardMenu: React.FunctionComponent<activeMenu> = ({
 					Prolink <Text style={{ color: "#F9AE07" }}>Digital</Text>
 				</Menu.Item>
 				<SubMenu
-					icon={<Avatar src={user.picture} />}
+					icon={<Avatar src={user?.picture} />}
 					style={{ float: "right" }}
 				>
 					<Menu.ItemGroup title="profil">
