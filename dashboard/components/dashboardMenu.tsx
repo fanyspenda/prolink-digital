@@ -45,7 +45,11 @@ export const DashboardMenu: React.FunctionComponent<activeMenu> = ({
 			</Menu>
 
 			<Layout>
-				<Sider width={200} style={{ backgroundColor: "#FFFFFF" }}>
+				<Sider
+					width={200}
+					style={{ backgroundColor: "#FFFFFF" }}
+					className="pt-5"
+				>
 					<Menu
 						mode="inline"
 						defaultOpenKeys={[menu]}
