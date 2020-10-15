@@ -1,9 +1,11 @@
-import { Layout, Menu } from "antd";
+import { Layout, Menu, Typography, Avatar } from "antd";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useRouter } from "next/router";
+import { ToolOutlined } from "@ant-design/icons";
 
 const { Header, Sider, Content } = Layout;
 const { SubMenu } = Menu;
+const { Text, Paragraph } = Typography;
 
 export type activeMenu = {
 	menu?: "industry" | "profile" | "users";
@@ -18,31 +20,37 @@ export const DashboardMenu: React.FunctionComponent<activeMenu> = ({
 	userRole,
 }) => {
 	const router = useRouter();
-	const { logout } = useAuth0();
+	const { logout, user } = useAuth0();
+	console.log(user);
+
 	return (
 		<Layout>
-			<Header style={{ backgroundColor: "white" }}>
-				<Menu mode="horizontal">
-					<Menu.Item onClick={() => router.push("/dashboard")}>
-						Prolink Digital
-					</Menu.Item>
-					<Menu.Item
-						style={{ float: "right" }}
-						onClick={() => logout()}
-					>
-						Logout
-					</Menu.Item>
-				</Menu>
-			</Header>
+			<Menu mode="horizontal">
+				<Menu.Item className="text-lg">
+					Prolink <Text style={{ color: "#F9AE07" }}>Digital</Text>
+				</Menu.Item>
+				<SubMenu
+					icon={<Avatar src={user.picture} />}
+					style={{ float: "right" }}
+				>
+					<Menu.ItemGroup>
+						<Menu.Item onClick={() => logout()}>Logout</Menu.Item>
+					</Menu.ItemGroup>
+				</SubMenu>
+			</Menu>
+
 			<Layout>
-				<Sider width={200}>
+				<Sider width={200} style={{ backgroundColor: "#FFFFFF" }}>
 					<Menu
 						mode="inline"
-						style={{ height: "100%" }}
 						defaultOpenKeys={[menu]}
 						defaultSelectedKeys={[subMenu]}
 					>
-						<SubMenu title="Industri Saya" key="industry">
+						<SubMenu
+							title="Industri Saya"
+							key="industry"
+							icon={<ToolOutlined />}
+						>
 							<Menu.Item
 								key="addIndustry"
 								onClick={() =>
@@ -77,16 +85,7 @@ export const DashboardMenu: React.FunctionComponent<activeMenu> = ({
 					</Menu>
 				</Sider>
 
-				<Content
-					style={{
-						padding: 24,
-						margin: 0,
-						height: "100%",
-						minHeight: "200px",
-					}}
-				>
-					{children}
-				</Content>
+				<Content className="h-screen relative p-5">{children}</Content>
 			</Layout>
 		</Layout>
 	);

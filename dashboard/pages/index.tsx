@@ -52,7 +52,7 @@ const Home = () => {
 		console.log(error);
 		return <p>{error}</p>;
 	} else if (isAuthenticated) {
-		return loadingComponent("menghubungkan ke dashdashboardboard...");
+		return loadingComponent("menghubungkan ke dashboard...");
 	} else {
 		return <p>anda belum login</p>;
 	}
