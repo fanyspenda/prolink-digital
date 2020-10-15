@@ -8,10 +8,11 @@ import { userContext } from "context/userContext";
 import { hasuraHeader } from "environtment";
 import { LoadingErrorHandler } from "components/loadingErrorHandler";
 import { PieChart, Pie, Cell, Legend, Tooltip } from "recharts";
+import { TeamOutlined, CheckCircleOutlined } from "@ant-design/icons";
 
-const { Title, Paragraph } = Typography;
+const { Title, Paragraph, Text } = Typography;
 
-const COLORS = ["#0088FE", "#00C49F"];
+const COLORS = ["#FF8A5F", "#5AA9E2"];
 
 type interestedViewerType = {
 	name: string;
@@ -20,7 +21,7 @@ type interestedViewerType = {
 
 const dataInterestedViewer = [
 	{
-		name: "Pengunjung",
+		name: "Pengunjung Tidak Tertarik",
 		value: 72,
 	},
 	{
@@ -30,39 +31,61 @@ const dataInterestedViewer = [
 ];
 
 const dashboardUser = (name: string, data: interestedViewerType[]) => (
-	<Layout className="flex flex-row justify-start items-start bg-red-500">
+	<Layout className="flex flex-row justify-start items-start">
 		{/* */}
 		<Layout className="flex flex-col mr-1" style={{ flex: 2 }}>
-			<div className="bg-white rounded-md p-5">
+			<div className="bg-white rounded-md p-10">
 				<Title>Selamat Datang!</Title>
 				<Paragraph>
 					Selamat datang di halaman <i>dashboard</i>, {name}
 				</Paragraph>
 			</div>
 			<Layout className="flex flex-row  mt-2">
-				<Layout className="bg-white rounded-md p-5 mr-1">
-					<Title level={4}>Jumlah Industri Dimiliki</Title>
+				<Layout className="bg-white rounded-md p-10 mr-1 flex flex-row justify-start items-center">
+					<TeamOutlined
+						className="text-5xl mr-12"
+						style={{ color: "#F3DB6D" }}
+					/>
+					<div>
+						<Text className="font-thin">
+							Jumlah Industri Dimiliki
+						</Text>{" "}
+						<br />
+						<Text className="text-3xl font-semibold">6</Text>
+					</div>
 				</Layout>
-				<Layout className="bg-white rounded-md p-5 ml-1">
-					<Title level={4}>Jumlah Industri Divalidasi</Title>
+				<Layout className="bg-white rounded-md p-10 ml-1 flex flex-row justify-start items-center">
+					<CheckCircleOutlined
+						className="text-5xl mr-12"
+						style={{ color: "#5AA9E2" }}
+					/>
+					<div>
+						<Text className="font-thin">
+							Jumlah Industri Divalidasi
+						</Text>{" "}
+						<br />
+						<Text className="text-3xl font-semibold">6</Text>
+					</div>
 				</Layout>
 			</Layout>
 		</Layout>
 
-		<Layout
-			className=" bg-white rounded-md p-5 ml-1 text-center"
-			style={{ flex: 1 }}
-		>
+		<Layout className=" bg-white rounded-md p-10 ml-1" style={{ flex: 1 }}>
 			<Title level={3}>Diagram Pengunjung</Title>
 
-			<PieChart width={500} height={300}>
+			<PieChart width={400} height={213}>
 				<Tooltip />
-				<Legend verticalAlign="bottom" iconType="rect" />
+				<Legend
+					verticalAlign="middle"
+					layout="vertical"
+					align="right"
+				/>
 				<Pie
 					data={data}
 					dataKey="value"
 					nameKey="name"
-					innerRadius={30}
+					cx="20%"
+					innerRadius={50}
 				>
 					{data.map((_, index) => (
 						<Cell fill={COLORS[index]} />
@@ -77,7 +100,7 @@ const dashboardAdmin = (
 	<Layout className="flex flex-row justify-start items-start bg-red-500">
 		{/* */}
 		<Layout className="flex flex-col mr-1" style={{ flex: 2 }}>
-			<div className="bg-white rounded-md p-5">
+			<div className="bg-white rounded-md p-10">
 				<Title>Selamat Datang!</Title>
 				<Paragraph>
 					Selamat datang di halaman <i>dashboard</i> Administrator,{" "}

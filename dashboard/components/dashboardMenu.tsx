@@ -1,7 +1,7 @@
 import { Layout, Menu, Typography, Avatar } from "antd";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useRouter } from "next/router";
-import { ToolOutlined } from "@ant-design/icons";
+import { TeamOutlined, LogoutOutlined } from "@ant-design/icons";
 
 const { Header, Sider, Content } = Layout;
 const { SubMenu } = Menu;
@@ -33,8 +33,13 @@ export const DashboardMenu: React.FunctionComponent<activeMenu> = ({
 					icon={<Avatar src={user.picture} />}
 					style={{ float: "right" }}
 				>
-					<Menu.ItemGroup>
-						<Menu.Item onClick={() => logout()}>Logout</Menu.Item>
+					<Menu.ItemGroup title="profil">
+						<Menu.Item
+							onClick={() => logout()}
+							icon={<LogoutOutlined />}
+						>
+							Logout
+						</Menu.Item>
 					</Menu.ItemGroup>
 				</SubMenu>
 			</Menu>
@@ -49,7 +54,7 @@ export const DashboardMenu: React.FunctionComponent<activeMenu> = ({
 						<SubMenu
 							title="Industri Saya"
 							key="industry"
-							icon={<ToolOutlined />}
+							icon={<TeamOutlined />}
 						>
 							<Menu.Item
 								key="addIndustry"
