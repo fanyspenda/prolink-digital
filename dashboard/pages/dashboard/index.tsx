@@ -9,7 +9,7 @@ import { hasuraHeader } from "environtment";
 import { LoadingErrorHandler } from "components/loadingErrorHandler";
 import { PieChart, Pie, Cell, Legend, Tooltip } from "recharts";
 import {
-	TeamOutlined,
+	BankOutlined,
 	CheckCircleOutlined,
 	ExclamationCircleOutlined,
 } from "@ant-design/icons";
@@ -69,7 +69,7 @@ const dashboardUser = (name: string, data: interestedViewerType[]) => (
 			</div>
 			<Layout className="flex flex-row  mt-5">
 				<Layout className="bg-white rounded-md p-10 mr-5 flex flex-row justify-start items-center">
-					<TeamOutlined
+					<BankOutlined
 						className="text-5xl mr-12"
 						style={{ color: "#F3DB6D" }}
 					/>
@@ -135,9 +135,9 @@ const dashboardAdmin = (name: string, data: interestedViewerType[]) => (
 			</div>
 			<Layout className="flex flex-row mt-5 flex-no-wrap">
 				<Layout className="bg-white rounded-md p-10 mr-5 flex flex-row justify-start items-center">
-					<TeamOutlined
+					<BankOutlined
 						className="text-5xl mr-12"
-						style={{ color: "#F3DB6D" }}
+						style={{ color: "#ABD87D" }}
 					/>
 					<div>
 						<Text className="font-thin">
@@ -150,7 +150,7 @@ const dashboardAdmin = (name: string, data: interestedViewerType[]) => (
 				<Layout className="bg-white rounded-md p-10 mr-5 flex flex-row justify-start items-center">
 					<ExclamationCircleOutlined
 						className="text-5xl mr-12"
-						style={{ color: "#ABD87D" }}
+						style={{ color: "#F3DB6D" }}
 					/>
 					<div>
 						<Text className="font-thin">

@@ -1,5 +1,5 @@
 import { DashboardMenu } from "components/dashboardMenu";
-import { Typography, List, Avatar, Button } from "antd";
+import { Typography, List, Avatar, Button, Layout } from "antd";
 import { hasuraHeader } from "environtment";
 import { useContext } from "react";
 import { userContext } from "context/userContext";
@@ -53,44 +53,60 @@ const Company = () => {
 				<Head>
 					<title>List Industri</title>
 				</Head>
-				<Title>List Industri</Title>
-				<Paragraph>Berikut daftar industri yang kamu kelola</Paragraph>
-				{dLoading && <p>menghapus industri...</p>}
-				{dError && <p>gagal menghapus: {dError.message}</p>}
-				<List
-					dataSource={data.company}
-					renderItem={(item) => (
-						<List.Item>
-							<List.Item.Meta
-								avatar={
-									<Avatar
-										src={
-											item.logo_url ||
-											"/company/default.png"
-										}
-									/>
-								}
-								title={<a href="#">{item.name}</a>}
-								description={item.description}
-							/>
-							<NextLink
-								href="/dashboard/company/[companyEdit]"
-								as={`/dashboard/company/${item.id}`}
-							>
-								<Button>Edit</Button>
-							</NextLink>
-							<Button
-								onClick={() =>
-									deleteCompany({
-										variables: { companyId: item.id },
-									})
-								}
-							>
-								Delete
-							</Button>
-						</List.Item>
-					)}
-				/>
+				<Layout className="bg-white p-10 rounded-lg">
+					<Title>List Industri</Title>
+					<Paragraph>
+						Berikut daftar industri yang kamu kelola
+					</Paragraph>
+					{dLoading && <p>menghapus industri...</p>}
+					{dError && <p>gagal menghapus: {dError.message}</p>}
+					<List
+						dataSource={data.company}
+						renderItem={(item) => (
+							<List.Item>
+								<List.Item.Meta
+									avatar={
+										<Avatar
+											src={
+												item.logo_url ||
+												"/company/default.png"
+											}
+										/>
+									}
+									title={
+										<text className="font-semibold">
+											<NextLink
+												href="/dashboard/company/details/[details]"
+												as={`/dashboard/company/details/${item.id}`}
+											>
+												{item.name}
+											</NextLink>
+										</text>
+									}
+									description={item.description}
+								/>
+								<NextLink
+									href="/dashboard/company/[companyEdit]"
+									as={`/dashboard/company/${item.id}`}
+								>
+									<Button className="border-yellow-400 text-yellow-400 font-semibold hover:bg-yellow-400 hover:text-white">
+										Edit
+									</Button>
+								</NextLink>
+								<Button
+									className="border-red-400 text-red-400 font-semibold hover:bg-red-400 hover:text-white"
+									onClick={() =>
+										deleteCompany({
+											variables: { companyId: item.id },
+										})
+									}
+								>
+									Delete
+								</Button>
+							</List.Item>
+						)}
+					/>
+				</Layout>
 			</DashboardMenu>
 		);
 };

@@ -6,6 +6,7 @@ import {
 	Button,
 	Upload,
 	notification,
+	Layout,
 } from "antd";
 import {
 	GetCategoriesQuery,
@@ -124,126 +125,130 @@ export const CompanyForm: React.FunctionComponent<companyFormType> = ({
 
 	return (
 		<>
-			<Title>
-				{!isEdit ? "Tambahkan Industri Baru" : "Ubah Industri"}
-			</Title>
-			<Paragraph>
-				{!isEdit
-					? "yuk tambahkan industrimu di sini"
-					: "Silahkan perbarui data industrimu di sini"}
-			</Paragraph>
-			{addLoading &&
-				(!isEdit ? (
-					<p>menambahkan data...</p>
-				) : (
-					<p>memperbarui data...</p>
-				))}
-			{addError && <p>terjadi kesalahan: {addError.message}</p>}
-			{updateError && <p>terjadi kesalahan: {updateError.message}</p>}
-			<Form labelCol={{ span: 2 }} onFinish={handleSubmit}>
-				<Form.Item
-					label="Nama Industri"
-					name="name"
-					initialValue={editData?.name}
-					rules={[
-						{
-							required: true,
-							message: "Nama Industri harus diisi!",
-						},
-					]}
-					hasFeedback
-				>
-					<Input autoFocus />
-				</Form.Item>
-				<Form.Item
-					label="Deskripsi"
-					name="description"
-					initialValue={editData?.description}
-					rules={[
-						{
-							required: true,
-							message: "Deskripsi harus diisi!",
-						},
-					]}
-					hasFeedback
-				>
-					<TextArea rows={3} />
-				</Form.Item>
-				<Form.Item
-					label="Kategori"
-					name="category"
-					initialValue={editData?.category}
-					rules={[
-						{
-							required: true,
-							message: "Kategori harus diisi!",
-						},
-					]}
-					hasFeedback
-				>
-					<Select
-						allowClear
-						placeholder="pilih kategori industrimu..."
+			<Layout className="bg-white p-10 rounded-lg">
+				<Title>
+					{!isEdit ? "Tambahkan Industri Baru" : "Ubah Industri"}
+				</Title>
+				<Paragraph>
+					{!isEdit
+						? "yuk tambahkan industrimu di sini"
+						: "Silahkan perbarui data industrimu di sini"}
+				</Paragraph>
+				{addLoading &&
+					(!isEdit ? (
+						<p>menambahkan data...</p>
+					) : (
+						<p>memperbarui data...</p>
+					))}
+				{addError && <p>terjadi kesalahan: {addError.message}</p>}
+				{updateError && <p>terjadi kesalahan: {updateError.message}</p>}
+				<Form labelCol={{ span: 2 }} onFinish={handleSubmit}>
+					<Form.Item
+						label="Nama Industri"
+						name="name"
+						initialValue={editData?.name}
+						rules={[
+							{
+								required: true,
+								message: "Nama Industri harus diisi!",
+							},
+						]}
+						hasFeedback
 					>
-						{categoryData.category.map((category) => (
-							<Option value={category.id}>{category.name}</Option>
-						))}
-					</Select>
-				</Form.Item>
-				<Form.Item
-					label="Alamat"
-					name="address"
-					initialValue={editData?.address}
-					rules={[
-						{
-							required: true,
-							message: "Alamat harus diisi!",
-						},
-					]}
-					hasFeedback
-				>
-					<Input />
-				</Form.Item>
-				<Form.Item
-					label="No. Telpon"
-					name="contact"
-					initialValue={editData?.contact}
-					rules={[
-						{
-							required: true,
-							message: "Nama Industri harus diisi!",
-						},
-					]}
-					hasFeedback
-				>
-					<Input />
-				</Form.Item>
-				<Form.Item
-					label="Logo"
-					name="image"
-					initialValue={editData?.imageUrl}
-					hasFeedback
-				>
-					<Upload
-						name="logo"
-						fileList={img}
-						listType="picture-card"
-						beforeUpload={(file) => handleChooseImage(file)}
-						onRemove={() => setImg([])}
+						<Input autoFocus />
+					</Form.Item>
+					<Form.Item
+						label="Deskripsi"
+						name="description"
+						initialValue={editData?.description}
+						rules={[
+							{
+								required: true,
+								message: "Deskripsi harus diisi!",
+							},
+						]}
+						hasFeedback
 					>
-						<Button>Click to upload</Button>
-					</Upload>
-				</Form.Item>
-				<Form.Item>
-					<Button
-						type="primary"
-						htmlType="submit"
-						loading={addLoading || updateLoading}
+						<TextArea rows={3} />
+					</Form.Item>
+					<Form.Item
+						label="Kategori"
+						name="category"
+						initialValue={editData?.category}
+						rules={[
+							{
+								required: true,
+								message: "Kategori harus diisi!",
+							},
+						]}
+						hasFeedback
 					>
-						{!isEdit ? "Tambah Data" : "Perbarui Data"}
-					</Button>
-				</Form.Item>
-			</Form>
+						<Select
+							allowClear
+							placeholder="pilih kategori industrimu..."
+						>
+							{categoryData.category.map((category) => (
+								<Option value={category.id}>
+									{category.name}
+								</Option>
+							))}
+						</Select>
+					</Form.Item>
+					<Form.Item
+						label="Alamat"
+						name="address"
+						initialValue={editData?.address}
+						rules={[
+							{
+								required: true,
+								message: "Alamat harus diisi!",
+							},
+						]}
+						hasFeedback
+					>
+						<Input />
+					</Form.Item>
+					<Form.Item
+						label="No. Telpon"
+						name="contact"
+						initialValue={editData?.contact}
+						rules={[
+							{
+								required: true,
+								message: "Nama Industri harus diisi!",
+							},
+						]}
+						hasFeedback
+					>
+						<Input />
+					</Form.Item>
+					<Form.Item
+						label="Logo"
+						name="image"
+						initialValue={editData?.imageUrl}
+						hasFeedback
+					>
+						<Upload
+							name="logo"
+							fileList={img}
+							listType="picture-card"
+							beforeUpload={(file) => handleChooseImage(file)}
+							onRemove={() => setImg([])}
+						>
+							<Button>Click to upload</Button>
+						</Upload>
+					</Form.Item>
+					<Form.Item>
+						<Button
+							type="primary"
+							htmlType="submit"
+							loading={addLoading || updateLoading}
+						>
+							{!isEdit ? "Tambah Data" : "Perbarui Data"}
+						</Button>
+					</Form.Item>
+				</Form>
+			</Layout>
 		</>
 	);
 };
