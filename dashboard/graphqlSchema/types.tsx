@@ -1610,6 +1610,19 @@ export type InsertCompanyMutation = (
   )> }
 );
 
+export type UpdateAdminRoleToUserMutationVariables = Exact<{
+  userId: Scalars['String'];
+}>;
+
+
+export type UpdateAdminRoleToUserMutation = (
+  { __typename?: 'mutation_root' }
+  & { update_user?: Maybe<(
+    { __typename?: 'user_mutation_response' }
+    & Pick<User_Mutation_Response, 'affected_rows'>
+  )> }
+);
+
 export type UpdateCompanyByPkMutationVariables = Exact<{
   id: Scalars['String'];
   name: Scalars['String'];
@@ -1640,6 +1653,17 @@ export type UpdateUserRoleToAdminMutation = (
   & { update_user?: Maybe<(
     { __typename?: 'user_mutation_response' }
     & Pick<User_Mutation_Response, 'affected_rows'>
+  )> }
+);
+
+export type GetAdminsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAdminsQuery = (
+  { __typename?: 'query_root' }
+  & { user: Array<(
+    { __typename?: 'user' }
+    & Pick<User, 'id' | 'name' | 'role' | 'email'>
   )> }
 );
 
@@ -1801,6 +1825,38 @@ export function useInsertCompanyMutation(baseOptions?: Apollo.MutationHookOption
 export type InsertCompanyMutationHookResult = ReturnType<typeof useInsertCompanyMutation>;
 export type InsertCompanyMutationResult = Apollo.MutationResult<InsertCompanyMutation>;
 export type InsertCompanyMutationOptions = Apollo.BaseMutationOptions<InsertCompanyMutation, InsertCompanyMutationVariables>;
+export const UpdateAdminRoleToUserDocument = gql`
+    mutation updateAdminRoleToUser($userId: String!) {
+  update_user(where: {id: {_eq: $userId}}, _set: {role: user}) {
+    affected_rows
+  }
+}
+    `;
+export type UpdateAdminRoleToUserMutationFn = Apollo.MutationFunction<UpdateAdminRoleToUserMutation, UpdateAdminRoleToUserMutationVariables>;
+
+/**
+ * __useUpdateAdminRoleToUserMutation__
+ *
+ * To run a mutation, you first call `useUpdateAdminRoleToUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateAdminRoleToUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateAdminRoleToUserMutation, { data, loading, error }] = useUpdateAdminRoleToUserMutation({
+ *   variables: {
+ *      userId: // value for 'userId'
+ *   },
+ * });
+ */
+export function useUpdateAdminRoleToUserMutation(baseOptions?: Apollo.MutationHookOptions<UpdateAdminRoleToUserMutation, UpdateAdminRoleToUserMutationVariables>) {
+        return Apollo.useMutation<UpdateAdminRoleToUserMutation, UpdateAdminRoleToUserMutationVariables>(UpdateAdminRoleToUserDocument, baseOptions);
+      }
+export type UpdateAdminRoleToUserMutationHookResult = ReturnType<typeof useUpdateAdminRoleToUserMutation>;
+export type UpdateAdminRoleToUserMutationResult = Apollo.MutationResult<UpdateAdminRoleToUserMutation>;
+export type UpdateAdminRoleToUserMutationOptions = Apollo.BaseMutationOptions<UpdateAdminRoleToUserMutation, UpdateAdminRoleToUserMutationVariables>;
 export const UpdateCompanyByPkDocument = gql`
     mutation updateCompanyByPK($id: String!, $name: String!, $description: String!, $address: String!, $category_id: Int!, $contact: String!, $logoUrl: String, $logoId: String) {
   update_company_by_pk(pk_columns: {id: $id}, _set: {name: $name, description: $description, address: $address, category_id: $category_id, contact: $contact, logo_url: $logoUrl, logo_id: $logoId}) {
@@ -1872,6 +1928,41 @@ export function useUpdateUserRoleToAdminMutation(baseOptions?: Apollo.MutationHo
 export type UpdateUserRoleToAdminMutationHookResult = ReturnType<typeof useUpdateUserRoleToAdminMutation>;
 export type UpdateUserRoleToAdminMutationResult = Apollo.MutationResult<UpdateUserRoleToAdminMutation>;
 export type UpdateUserRoleToAdminMutationOptions = Apollo.BaseMutationOptions<UpdateUserRoleToAdminMutation, UpdateUserRoleToAdminMutationVariables>;
+export const GetAdminsDocument = gql`
+    query getAdmins {
+  user(where: {role: {_eq: admin}}) {
+    id
+    name
+    role
+    email
+  }
+}
+    `;
+
+/**
+ * __useGetAdminsQuery__
+ *
+ * To run a query within a React component, call `useGetAdminsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAdminsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAdminsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAdminsQuery(baseOptions?: Apollo.QueryHookOptions<GetAdminsQuery, GetAdminsQueryVariables>) {
+        return Apollo.useQuery<GetAdminsQuery, GetAdminsQueryVariables>(GetAdminsDocument, baseOptions);
+      }
+export function useGetAdminsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAdminsQuery, GetAdminsQueryVariables>) {
+          return Apollo.useLazyQuery<GetAdminsQuery, GetAdminsQueryVariables>(GetAdminsDocument, baseOptions);
+        }
+export type GetAdminsQueryHookResult = ReturnType<typeof useGetAdminsQuery>;
+export type GetAdminsLazyQueryHookResult = ReturnType<typeof useGetAdminsLazyQuery>;
+export type GetAdminsQueryResult = Apollo.QueryResult<GetAdminsQuery, GetAdminsQueryVariables>;
 export const GetCategoriesDocument = gql`
     query getCategories {
   category {

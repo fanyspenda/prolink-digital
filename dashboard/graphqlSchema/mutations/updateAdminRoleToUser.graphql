@@ -1,0 +1,5 @@
+mutation updateAdminRoleToUser($userId: String!) {
+	update_user(where: { id: { _eq: $userId } }, _set: { role: user }) {
+		affected_rows
+	}
+}

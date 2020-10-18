@@ -1,0 +1,8 @@
+query getAdmins {
+	user(where: { role: { _eq: admin } }) {
+		id
+		name
+		role
+		email
+	}
+}

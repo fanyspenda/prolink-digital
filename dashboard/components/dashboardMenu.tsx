@@ -13,8 +13,8 @@ const { SubMenu } = Menu;
 const { Text, Link } = Typography;
 
 export type activeMenu = {
-	menu?: "industry" | "profile" | "users";
-	subMenu?: "addIndustry" | "viewIndustry" | "viewUser";
+	menu?: "industry" | "users";
+	subMenu?: "addIndustry" | "viewIndustry" | "viewUser" | "viewAdmin";
 	userRole: string;
 };
 
@@ -107,7 +107,7 @@ export const DashboardMenu: React.FunctionComponent<activeMenu> = ({
 								<Menu.Item
 									key="viewAdmin"
 									onClick={() =>
-										router.push("/dashboard/admin")
+										router.push("/dashboard/user/admin")
 									}
 								>
 									Lihat Admin

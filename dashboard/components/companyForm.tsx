@@ -106,7 +106,10 @@ export const CompanyForm: React.FunctionComponent<companyFormType> = ({
 				notification.open({
 					message: "Sukses",
 					description: "sukses menambah Industri",
-					style: { backgroundColor: "#adffc8" },
+					style: {
+						border: "4px solid #66ff98",
+						borderRadius: "10px",
+					},
 				});
 			})
 			.catch((err) => {

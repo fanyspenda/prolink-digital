@@ -1,5 +1,5 @@
 import { DashboardMenu } from "components/dashboardMenu";
-import { Typography, Layout, List, Avatar, Button } from "antd";
+import { Typography, Layout, List, Avatar, Button, notification } from "antd";
 import { useContext, useEffect } from "react";
 import { userContext } from "context/userContext";
 import { useRouter } from "next/router";
@@ -29,7 +29,17 @@ const ViewUsers = () => {
 		{ loading: mLoading, error: mError },
 	] = useUpdateUserRoleToAdminMutation({
 		context: hasuraHeader(id, role),
-		onCompleted: () => refetch(),
+		onCompleted: () => {
+			refetch();
+			notification.open({
+				message: "Sukses",
+				description: "sukses menjadikan admin!",
+				style: {
+					border: "4px solid #66ff98",
+					borderRadius: "10px",
+				},
+			});
+		},
 	});
 
 	const handleButtonRoleClick = (userId: string) => {
@@ -49,7 +59,7 @@ const ViewUsers = () => {
 	} else if (role != "admin") return <p>unauthorized</p>;
 	else
 		return (
-			<DashboardMenu menu="profile" subMenu="viewUser" userRole="admin">
+			<DashboardMenu menu="users" subMenu="viewUser" userRole="admin">
 				<Layout className="bg-white p-10">
 					<Title>Daftar Pengguna</Title>
 					<List
