@@ -14,7 +14,7 @@ import { UserOutlined } from "@ant-design/icons";
 
 const { Title, Paragraph } = Typography;
 
-const ViewUsers = () => {
+const ViewAdmins = () => {
 	const { user } = useContext(userContext);
 	const { id, role } = user;
 	const router = useRouter();
@@ -84,4 +84,4 @@ const ViewUsers = () => {
 		);
 };
 
-export default ViewUsers;
+export default ViewAdmins;

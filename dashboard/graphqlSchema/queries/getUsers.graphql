@@ -1,0 +1,8 @@
+query getUsers {
+	user(where: { role: { _eq: user } }) {
+		id
+		name
+		role
+		email
+	}
+}
